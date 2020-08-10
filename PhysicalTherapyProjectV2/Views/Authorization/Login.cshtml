@@ -13,7 +13,7 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                             <div class="card-body">
-                                <form asp-action="Login" asp-controller="Login" method="post">
+                                <form asp-action="Login" asp-controller="Authorization" method="post">
                                     <div class="text-danger"  style="list-style:none;text-align:center;">
                                         @Html.ValidationSummary()
                                     </div>
@@ -35,13 +35,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" asp-action="ForgotPassword" asp-controller="Login">Pamiršote slaptažodį?</a>
+                                        <a class="small" asp-action="ForgotPassword" asp-controller="Authorization">Pamiršote slaptažodį?</a>
                                         <div class="form-group mt-4 mb-0"><input class="btn btn-primary btn-block" type="submit" value="Prisijungti" /></div>
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer text-center">
-                                <div class="small"><a asp-controller="Login" asp-action="Registration">Dar ne narys? Registruokis</a></div>
+                                <div class="small"><a asp-controller="Authorization" asp-action="Registration">Dar ne narys? Registruokis</a></div>
                             </div>
                         </div>
                     </div>

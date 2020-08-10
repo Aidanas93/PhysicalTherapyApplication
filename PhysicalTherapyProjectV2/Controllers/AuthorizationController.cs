@@ -13,13 +13,13 @@ using PhysicalTherapyProjectV2.Services.Interfaces;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
-    public class LoginController : Controller
+    public class AuthorizationController : Controller
     {
         private readonly IMapper mapper;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IUserService<ApplicationUser> userService;
-        public LoginController(IMapper mapper, UserManager<ApplicationUser> userManager, 
+        public AuthorizationController(IMapper mapper, UserManager<ApplicationUser> userManager,
                                SignInManager<ApplicationUser> signInManager, IUserService<ApplicationUser> userService)
         {
             this.mapper = mapper;
@@ -52,7 +52,7 @@ namespace PhysicalTherapyProjectV2.Controllers
                 }
 
                 return BadRequest();
-                
+
             }
 
             return RedirectToAction(nameof(Login));
@@ -75,10 +75,10 @@ namespace PhysicalTherapyProjectV2.Controllers
 
             var result = await signInManager.PasswordSignInAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe, false);
 
-            if(!result.Succeeded)
+            if (!result.Succeeded)
             {
                 ModelState.TryAddModelError("BadLoginInfo", "Neteisingai įvesti prisijungimo duomenys!");
-                
+
                 return View(loginModel);
             }
 
@@ -99,33 +99,30 @@ namespace PhysicalTherapyProjectV2.Controllers
                 // Find the user by email
                 var user = await userManager.FindByEmailAsync(model.Email);
                 // If the user is found AND Email is confirmed
-                //if (user != null && await userManager.IsEmailConfirmedAsync(user))
-                //{
+                if (user != null)
+                {
                     // Generate the reset password token
                     var token = await userManager.GeneratePasswordResetTokenAsync(user);
 
                     // Build the password reset link
-                    var passwordResetLink = Url.Action(nameof(ResetPassword), "Login",
+                    var passwordResetLink = Url.Action(nameof(ResetPassword), "Authorization",
                             new { email = model.Email, token = token }, Request.Scheme);
-
-
-                    // Send the user to Forgot Password Confirmation view
-                //    return View("ForgotPasswordConfirmation");
-                //}
-
+                }
                 // To avoid account enumeration and brute force attacks, don't
                 // reveal that the user does not exist or is not confirmed
-                return View("ForgotPasswordConfirmation");
+                return View(nameof(ForgotPasswordConfirmation));
             }
-
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult ForgotPasswordConfirmation() => View();
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPassword(string email, string token)
         {
-            if(email == null || token == null)
+            if (email == null || token == null)
             {
                 ModelState.AddModelError("", "Netinkami duomenys!");
             }

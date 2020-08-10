@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProjectV2.Models;
 using PhysicalTherapyProjectV2.Models.ViewModel;
 using PhysicalTherapyProjectV2.Services.Interfaces;
-using ImageParserLibrary;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PhysicalTherapyProjectV2.Controllers
@@ -16,7 +12,7 @@ namespace PhysicalTherapyProjectV2.Controllers
     {
         protected IPostService postService;
         private int postType;
-        
+
         public BasePostController(IPostService _postService, IGenericService<Post> genericService, int _postType) : base(genericService)
         {
             postService = _postService;
@@ -27,7 +23,8 @@ namespace PhysicalTherapyProjectV2.Controllers
         public async override Task<ActionResult> Index() => View(await postService.GetAllByTypeAsync(postType));
 
         [HttpGet]
-        public override ActionResult Create() => View( new PostViewModel { 
+        public override ActionResult Create() => View(new PostViewModel
+        {
             Post = new Post()
         });
 
@@ -43,7 +40,7 @@ namespace PhysicalTherapyProjectV2.Controllers
             ImageParser imageParser = new ImageParser();
             var imageList = imageParser.ConvertToBytes(viewModel.Files);
 
-            foreach(var image in imageList)
+            foreach (var image in imageList)
             {
                 viewModel.Post.Images.Add(new Image { Content = image });
             }

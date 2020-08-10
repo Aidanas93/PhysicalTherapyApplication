@@ -41,16 +41,17 @@ namespace PhysicalTherapyProjectV2
 
             services.AddAutoMapper(typeof(MapProfile));
             services.AddDbContext<ApplicationDbContext>(options =>
-                
+
             options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, ApplicationRole>(opt =>
             {
-                opt.Password.RequiredLength = 6;
+                opt.Password.RequiredLength = 1;
                 opt.Password.RequireDigit = false;
                 opt.Password.RequireUppercase = false;
-                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireLowercase = false;
                 opt.User.RequireUniqueEmail = true;
+                opt.Password.RequireNonAlphanumeric = false;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
