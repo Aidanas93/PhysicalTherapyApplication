@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] = "Homepage";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+    <section class="section-features js--post-section" style="padding-bottom:.0px;">
+
+        <div class="flex-row">
+
+            <div class="empty-item-1"></div>
+            <div class="main-item-3">
+                <h2 class="header-underline">Mūsų Partneriai</h2>
+
+                <a href="https://www.teida.lt/"><img src="data:image/png;base64,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" /></a>
+            </div>
+            <div class="empty-item-3"></div>
+
+
+        </div>
+
+    </section>
+
+
+<section class="section-features" style="padding-top:30px;">
+    <div class="flex-row">
+
+        <div class="empty-item-1"></div>
+        <div class="main-item-3">
+
+
+            <h2 class="header-underline" style="font-size:2em;">Naujausi Įrašai</h2>
+            @foreach (var post in Model)
+            {
+                if (post.isForAuthenticatedUser == false)
+                {
+                    var item = post.Body.Length <= 500 ? post.Body : post.Body.Substring(0, 500) + "...";
+
+                    <div class="index-post post" onmouseover="highlightPost(this)" onmouseout="removeHighlight(this)">
+                        <h2>@post.Title</h2>
+                        <div>
+                            <p>
+                                <span class="post-person"><ion-icon name="person-circle-outline"></ion-icon>@post.CreatedBy</span>
+                                <span class="post-date"><ion-icon name="calendar-outline"></ion-icon>@post.CreatedOn.ToString("yyyy-MM-dd HH:mm")</span>
+                            </p>
+                        </div>
+                        <div class="clear" style="margin-bottom:5px;"></div>
+                        <p class="post-body">@item</p>
+                        <a class="btn btn-ghost post-btn" asp-action="Get" asp-controller="Article" asp-route-id="@post.Id">Daugiau</a>
+                    </div>
+                }
+            }
+
+
+        </div>
+        <div class="empty-item-3"></div>
+
+
+    </div>
+
+
+
+
+</section>
+
+
+
+

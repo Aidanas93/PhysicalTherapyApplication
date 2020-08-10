@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <link rel="stylesheet" type="text/css" href="~/vendors/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="~/vendors/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main-style.css">
+    <link rel="stylesheet" type="text/css" href="~/css/index-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+</head>
+<body class="site-content">
+   
+        <header class="index-header">
+            <nav>
+                <div class="row">
+                    <ion-icon name="body-outline" class="icon-logo-big"></ion-icon>
+                    <ul class="main-nav">
+                        <li><a asp-controller="Home" asp-action="AboutUs">Apie Mus</a></li>
+                        @*<li><a asp-action="SignUp" asp-controller="Login">Prisijungti</a></li>
+                        <li><a asp-action="Registration" asp-controller="Login">Registracija</a></li>*@
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="hero-text-box">
+                <h1>Lietuvos kineziterapeutų draugija</h1>
+                <h2>Lithuanian Physiotherapy Association</h2>
+                <a class="btn btn-full" asp-action="Registration" asp-controller="Login">Prisijunk prie mūsų</a>
+                <a class="btn btn-ghost" href="#">Sužinok daugiau</a>
+            </div>
+
+        </header>
+        <div>
+            @RenderBody()
+        </div>
+    
+    <footer class="footer" >
+        <div class="row">
+
+          
+                <ul class="footer-nav">
+                    <li><a asp-controller="Home" asp-action="Privacy">Privatumo Politika</a></li>
+                    <li><a asp-controller="Home" asp-action="Partnership">Bendradarbiavimas</a></li>
+                    <li><a href="#">Įsakymai Ir Įstatymai</a></li>
+                    <li>
+
+                    </li>
+                </ul>
+         
+        </div>
+        <div class="row">
+            <div class="contact">
+                <p>Kontaktai:</p>
+                <p>El.Paštas: lietuvosktd@gmail.com</p>
+                <p>Adresas : Eivenių g. 2, Kaunas.</p>
+                <p>
+                    Mus galite rasti facebook:
+                    <a href="https://www.facebook.com/Lietuvosktd/" target="_blank">
+                        <ion-icon name="logo-facebook" class="facebook-icon"></ion-icon>
+                    </a>
+                </p>
+            </div>
+        </div>
+         
+        
+
+        <div class="row">
+            <p>
+                Copyright &copy; 2020, Lietuvos kineziterapeutų draugija
+            </p>
+        </div>
+    </footer>
+
+    <script src="~/vendors/js/jquery.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="~/vendors/js/jquery.waypoints.min.js"></script>
+    <script src="~/js/waypoints.js"></script>
+    <script src="~/js/script.js"></script>
+</body>
+</html>
+
+

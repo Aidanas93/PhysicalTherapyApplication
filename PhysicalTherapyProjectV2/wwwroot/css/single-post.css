@@ -1,0 +1,186 @@
+
+
+h2{
+    text-transform:none;
+    text-align: left;
+    font-weight: 300;
+    line-height: 125%;
+    font-size: 2em;
+}
+
+.text-body{
+    margin-top: 30px;
+    line-height: 140%;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+hr{
+    margin: 20px 0;
+}
+
+/* *************************************** */
+/* FEATURES AND PERSON&CALENDAR LINE */
+/* *************************************** */
+.flex-container{
+    display: flex;
+    flex-direction: row ;
+    justify-content: space-between;
+}
+
+.person-calendar-div{
+    display: block;
+    text-align: left;
+
+}
+
+
+.person-calendar-div ion-icon{
+   font-size: 1.5em;
+    
+}
+
+.social-features{
+    padding-top: 30px;
+    display: inline-block; 
+    font-size: 1.5em;
+}
+
+
+.fb-logo:link,
+.fb-logo:visited{
+    text-decoration: none;
+    color:#555;
+    background-color: transparent;
+    transition: background-color 0.2s;
+}
+
+.fb-logo:hover,
+.fb-logo:active{
+    color:#3b5998;
+}
+
+.print-logo:link,
+.print-logo:visited{
+    text-decoration: none;
+    color:#555;
+    background-color: transparent;
+    transition: background-color 0.2s;
+}
+
+.print-logo:hover,
+.print-logo:active{
+    color:#3b5998;
+}
+
+.copy-logo:link,
+.copy-logo:visited{
+    text-decoration: none;
+    color:#555;
+    background-color: transparent;
+    transition: background-color 0.2s;
+}
+
+.copy-logo:hover,
+.copy-logo:active{
+    color:#3b5998;
+}
+
+
+/* *************************************** */
+/* IMAGES SLIDESHOW  */
+/* *************************************** */
+
+.image-container {
+  position: relative;
+    
+}
+
+.slideshow-image{
+    width: 100%;
+    height: 60vh;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+  margin-bottom: -5px;
+
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev{
+    left: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #070606;
+  font-size: 0.65em;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}

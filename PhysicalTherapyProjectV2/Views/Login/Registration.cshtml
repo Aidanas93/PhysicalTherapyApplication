@@ -1,0 +1,89 @@
+﻿@model PhysicalTherapyProjectV2.Models.DTO.RegistrationDto
+@{
+    ViewData["Title"] = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div  id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row-cms justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Paskyros kūrimas</h3></div>
+                                <div class="card-body">
+                                    <form asp-action="Registration" asp-controller="Login" method="post">
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div><span asp-validation-for="@Model.Name" class="text-danger"></span></div>
+                                                    <label asp-for="@Model.Name" class="small mb-1" for="inputFirstName">Vardas</label>
+                                                    <input asp-for="@Model.Name" class="form-control py-4" id="inputFirstName" type="text" placeholder="Vardas" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div><span asp-validation-for="@Model.Surname" class="text-danger"></span></div>
+                                                    <label asp-for="@Model.Surname" class="small mb-1" for="inputLastName">Pavardė</label>
+                                                    <input asp-for="@Model.Surname" class="form-control py-4" id="inputLastName" type="text" placeholder="Pavardė" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div><span asp-validation-for="@Model.Email" class="text-danger"></span>
+                                            
+                                            </div>
+                                            <label asp-for="@Model.Email" class="small mb-1" for="inputEmailAddress">El. Paštas</label>
+                                            <input asp-for="@Model.Email" class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="El. Paštas" />
+                                        </div>
+                                        <div class="form-row">                                    
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div><span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span></div>
+                                                    <label asp-for="@Model.Password" class="small mb-1" for="inputPassword">Slaptažodis</label>
+                                                    <input asp-for="@Model.Password" class="form-control py-4" id="inputPassword" type="password" placeholder="Slaptažodis" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div><span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span></div>
+                                                    <label asp-for="@Model.ConfirmPassword" class="small mb-1" for="inputConfirmPassword">Patvirtinti slaptažodį</label>
+                                                    <input asp-for="@Model.ConfirmPassword" class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Patvirtinti slaptažodį" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div><span asp-validation-for="@Model.OccupationId" class="text-danger"></span></div>
+                                                    <label asp-for="@Model.OccupationId" class="small mb-1">Okupacija:</label>
+                                                    <select asp-for="@Model.OccupationId" class="form-control">
+                                                        <option selected="selected">Pasirinkti</option>
+                                                        <option value="1">Studentas</option>
+                                                        <option value="2">Dėstytojas</option>
+                                                        <option value="3">Kineziterapeutas</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-12">
+                                                <div><span asp-validation-for="@Model.AgreedToRules" class="text-danger"></span></div>
+                                                <label><input class="checkbox-inline" type="checkbox" asp-for="@Model.AgreedToRules" /> Aš sutinku su <a asp-controller="Home" asp-action="Privacy">privatumo taisyklėmis</a></label>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="form-group mt-4 mb-0"><input class="btn btn-primary btn-block" type="submit" value="Patvirtinti"/></div>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <div class="small"><a asp-controller="Login" asp-action="Login">Jau esate užsiregistravęs? Prisijungti</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+</div>

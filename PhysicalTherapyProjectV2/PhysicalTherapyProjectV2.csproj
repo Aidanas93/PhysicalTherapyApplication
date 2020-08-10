@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-PhysicalTherapyProjectV2-D4EC1CA7-8BE8-4345-865E-6570FB7AC735</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200425093933_addsInitialMigration.cs" />
+    <Compile Remove="Data\Migrations\20200425093933_addsInitialMigration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200425111635_ChangedIdentityPrimaryKeyToInteger.cs" />
+    <Compile Remove="Data\Migrations\20200425111635_ChangedIdentityPrimaryKeyToInteger.Designer.cs" />
+    <Compile Remove="Migrations\20200518111638_SeedPostArticleTable.cs" />
+    <Compile Remove="Migrations\20200518111638_SeedPostArticleTable.Designer.cs" />
+    <Compile Remove="Migrations\20200518112012_Test.cs" />
+    <Compile Remove="Migrations\20200518112012_Test.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ImageParserLibrary">
+      <HintPath>..\..\..\ImageParserLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+﻿@model PostViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<form asp-action="CreateViewModel" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="@Model.Post.Id" />
+
+    <label asp-for="@Model.Post.Title">Title:</label>
+    <input type="text" asp-for="@Model.Post.Title" />
+
+    <label asp-for="@Model.Post.Body">Body:</label>
+    <input type="text" asp-for="@Model.Post.Body" />
+
+    <label asp-for="@Model.Files" />
+    <input type="file" asp-for="@Model.Files" multiple />
+
+    <button type="submit" class="btn btn-success">Create</button>
+</form>
+

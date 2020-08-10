@@ -1,0 +1,21 @@
+.index-header{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/img/massage.jpg);
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+    margin: 0;
+    background-attachment: fixed;
+
+}
+
+.main-nav {
+         margin-top: 55px;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited{
+    color:#FFF;
+    font-size: 0.9em;
+    padding: 8px 0; 
+}
+
