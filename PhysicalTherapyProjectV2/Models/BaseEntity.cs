@@ -12,7 +12,7 @@ namespace PhysicalTherapyProjectV2.Models
         {
             this.CreatedOn = DateTime.Now;
             this.UpdatedOn = DateTime.Now;
-        }   
+        }
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

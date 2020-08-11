@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<PhysicalTherapyProjectV2.Models.ApplicationUser>
 @{
     ViewData["Title"] = "Index";
     Layout = "_AdminLayout";
@@ -51,6 +51,11 @@
                 </div>
             </div>
 
+            @if (TempData.ContainsKey("message"))
+            {
+                <partial name="_AlertBoxPartial" model="@TempData["message"].ToString()" />
+            }
+
             <div class="card mb-4">
                 <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable Example</div>
                 <div class="card-body">
@@ -58,33 +63,48 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Vardas</th>
+                                    <th>Pavardė</th>
+                                    <th>El. Paštas</th>
+                                    <th>Pareigos</th>
+                                    <th>Ar Patvirtintas</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Vardas</th>
+                                    <th>Pavardė</th>
+                                    <th>El. Paštas</th>
+                                    <th>Pareigos</th>
+                                    <th>Ar Patvirtintas</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                </tr>
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td>@user.Name</td>
+                                        <td>@user.Surname</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.Occupation.Name</td>
+                                        <td>@(user.IsConfirmed == true ? "Patvirtintas" : "Nepatvirtintas")</td>
+                                        <td>
+                                            @if (user.IsConfirmed == false)
+                                            {
+                                                <form asp-action="ConfirmUser" asp-controller="Admin" asp-route-userId="@user.Id" method="post">
+                                                    <input class="btn btn-primary btn-block" type="submit" value="Patvirtinti" />
+                                                </form>
+                                            }
+                                        </td>
+                                        <td>
+                                            <form asp-action="DeleteUser" asp-controller="Admin" asp-route-userId="@user.Id" method="post">
+                                                <input class="btn btn-danger btn-block" type="submit" value="Ištrinti" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

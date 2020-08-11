@@ -16,6 +16,8 @@
     <Compile Remove="Migrations\20200518111638_SeedPostArticleTable.Designer.cs" />
     <Compile Remove="Migrations\20200518112012_Test.cs" />
     <Compile Remove="Migrations\20200518112012_Test.Designer.cs" />
+    <Compile Remove="Migrations\20200811074000_changes.cs" />
+    <Compile Remove="Migrations\20200811074000_changes.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

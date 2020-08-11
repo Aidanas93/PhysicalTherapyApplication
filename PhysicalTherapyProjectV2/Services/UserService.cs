@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace PhysicalTherapyProjectV2.Services
 {
     public class UserService : IGenericService<ApplicationUser>, IUserService<ApplicationUser>
-    { 
+    {
         private ApplicationDbContext applicationDbContext;
         public UserService(ApplicationDbContext _applicationDbContext)
         {
@@ -20,6 +20,7 @@ namespace PhysicalTherapyProjectV2.Services
         public async Task<ICollection<ApplicationUser>> GetAllAsync()
             => await applicationDbContext.Users
             .Include(post => post.UserPosts)
+            .Include(occ => occ.Occupation)
             .Where(x => x.Id > 0)
             .ToListAsync();
 
@@ -27,6 +28,7 @@ namespace PhysicalTherapyProjectV2.Services
         public async Task<ApplicationUser> GetByEmailAsync(string email)
             => await applicationDbContext.Users
             .Include(post => post.UserPosts)
+            .Include(occ => occ.Occupation)
             .Where(p => p.Email == email)
             .FirstOrDefaultAsync();
 
@@ -42,7 +44,8 @@ namespace PhysicalTherapyProjectV2.Services
             ApplicationUser dbEntry = await GetUser(user.Id);
             if (dbEntry != null)
             {
-
+                applicationDbContext.Entry(dbEntry).CurrentValues.SetValues(user);
+                await applicationDbContext.SaveChangesAsync();
             }
             return user;
         }

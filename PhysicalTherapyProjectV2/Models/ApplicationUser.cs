@@ -13,6 +13,7 @@ namespace PhysicalTherapyProjectV2.Models
         public Image Image { get; set; }
         public int OccupationId { get; set; }
         public Occupation Occupation { get; set; }
+        public bool IsConfirmed { get; set; } = false;
         public ICollection<Post> UserPosts { get; set; }
     }
 }
