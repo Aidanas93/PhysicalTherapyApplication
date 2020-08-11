@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="lt">
 <head>
     <link rel="stylesheet" type="text/css" href="~/vendors/css/normalize.css">
@@ -9,45 +12,48 @@
     <title>@ViewBag.Title</title>
 </head>
 <body class="site-content">
-   
-        <header class="index-header">
-            <nav>
-                <div class="row">
-                    <ion-icon name="body-outline" class="icon-logo-big"></ion-icon>
-                    <ul class="main-nav">
-                        <li><a asp-controller="Home" asp-action="AboutUs">Apie Mus</a></li>
-                        @*<li><a asp-action="SignUp" asp-controller="Login">Prisijungti</a></li>
-                        <li><a asp-action="Registration" asp-controller="Login">Registracija</a></li>*@
-                        <partial name="_LoginPartial" />
-                    </ul>
-                </div>
-            </nav>
 
-            <div class="hero-text-box">
-                <h1>Lietuvos kineziterapeutų draugija</h1>
-                <h2>Lithuanian Physiotherapy Association</h2>
-                <a class="btn btn-full" asp-action="Registration" asp-controller="Login">Prisijunk prie mūsų</a>
-                <a class="btn btn-ghost" href="#">Sužinok daugiau</a>
+    <header class="index-header">
+        <nav>
+            <div class="row">
+                <ion-icon name="body-outline" class="icon-logo-big"></ion-icon>
+                <ul class="main-nav">
+                    <li><a asp-controller="Home" asp-action="AboutUs">Apie Mus</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-action="Index" asp-controller="Article">Naujienos</a></li>
+                        <li><a href="#">Renginiai</a></li>
+                    }
+                    <partial name="_LoginPartial" />
+                </ul>
             </div>
+        </nav>
 
-        </header>
-        <div>
-            @RenderBody()
+        <div class="hero-text-box">
+            <h1>Lietuvos kineziterapeutų draugija</h1>
+            <h2>Lithuanian Physiotherapy Association</h2>
+            <a class="btn btn-full" asp-action="Registration" asp-controller="Authorization">Prisijunk prie mūsų</a>
+            <a class="btn btn-ghost" href="#">Sužinok daugiau</a>
         </div>
-    
-    <footer class="footer" >
+
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="footer">
         <div class="row">
 
-          
-                <ul class="footer-nav">
-                    <li><a asp-controller="Home" asp-action="Privacy">Privatumo Politika</a></li>
-                    <li><a asp-controller="Home" asp-action="Partnership">Bendradarbiavimas</a></li>
-                    <li><a href="#">Įsakymai Ir Įstatymai</a></li>
-                    <li>
 
-                    </li>
-                </ul>
-         
+            <ul class="footer-nav">
+                <li><a asp-controller="Home" asp-action="Privacy">Privatumo Politika</a></li>
+                <li><a asp-controller="Home" asp-action="Partnership">Bendradarbiavimas</a></li>
+                <li><a href="#">Įsakymai Ir Įstatymai</a></li>
+                <li>
+
+                </li>
+            </ul>
+
         </div>
         <div class="row">
             <div class="contact">
@@ -62,8 +68,8 @@
                 </p>
             </div>
         </div>
-         
-        
+
+
 
         <div class="row">
             <p>

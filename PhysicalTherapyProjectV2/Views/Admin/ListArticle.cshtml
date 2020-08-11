@@ -1,0 +1,65 @@
+﻿@model IEnumerable<PhysicalTherapyProjectV2.Models.Post>
+@{
+    ViewData["Title"] = "ListArticle";
+    Layout = "_AdminLayout";
+}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Dashboard</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable Example</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Pavadinimas</th>
+                                    <th>Paskutinį Kartą Redagavo</th>
+                                    <th>Paskutinį Kartą Redaguotas</th>
+                                    <th>Autorius</th>
+                                    <th>Paskelbta</th>
+                                    <th>Registruotiems Vartotojams?</th>
+                                    <th>Redaguoti</th>
+                                    <th>Ištrinti</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Pavadinimas</th>
+                                    <th>Paskutinį Kartą Redagavo</th>
+                                    <th>Paskutinį Kartą Redaguotas</th>
+                                    <th>Autorius</th>
+                                    <th>Paskelbta</th>
+                                    <th>Registruotiems Vartotojams?</th>
+                                    <th>Redaguoti</th>
+                                    <th>Ištrinti</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var post in Model)
+                                {
+                                    <tr>
+                                        <td>@post.Title</td>
+                                        <td>@post.UpdatedBy</td>
+                                        <td>@post.UpdatedOn</td>
+                                        <td>@post.CreatedBy</td>
+                                        <td>@post.CreatedOn</td>
+                                        <td>@(post.isForAuthenticatedUser == true ? "Taip" : "Ne")</td>
+                                        <td><a class="btn btn-warning text-white">Redaguoti</a></td>
+                                        <td><a class="btn btn-danger text-white" >Ištrinti</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+

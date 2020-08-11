@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProjectV2.Models;
 using PhysicalTherapyProjectV2.Models.DTO;
 using PhysicalTherapyProjectV2.Services.Interfaces;
@@ -82,7 +83,7 @@ namespace PhysicalTherapyProjectV2.Controllers
                 return View(loginModel);
             }
 
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction(nameof(Index), "Article");
         }
 
         public IActionResult ForgotPassword()
@@ -107,6 +108,9 @@ namespace PhysicalTherapyProjectV2.Controllers
                     // Build the password reset link
                     var passwordResetLink = Url.Action(nameof(ResetPassword), "Authorization",
                             new { email = model.Email, token = token }, Request.Scheme);
+
+                    EmailHandler.Send(user.Email, "LKA Slaptažodžio Pakeitimas", $"Spauskite: {passwordResetLink}");
+
                 }
                 // To avoid account enumeration and brute force attacks, don't
                 // reveal that the user does not exist or is not confirmed
@@ -145,7 +149,7 @@ namespace PhysicalTherapyProjectV2.Controllers
                     var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
                     if (result.Succeeded)
                     {
-                        return View("ResetPasswordConfirmation");
+                        return View(nameof(ResetPasswordConfirmation));
                     }
                     // Display validation errors. For example, password reset token already
                     // used to change the password or password complexity rules not met
@@ -158,10 +162,13 @@ namespace PhysicalTherapyProjectV2.Controllers
 
                 // To avoid account enumeration and brute force attacks, don't
                 // reveal that the user does not exist
-                return View("ResetPasswordConfirmation");
+                return View(nameof(ResetPasswordConfirmation));
             }
             // Display validation errors if model state is not valid
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult ResetPasswordConfirmation() => View();
     }
 }

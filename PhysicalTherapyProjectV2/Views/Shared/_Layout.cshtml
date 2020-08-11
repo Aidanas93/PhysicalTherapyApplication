@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="lt">
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/cms-styles.css">
@@ -19,10 +22,13 @@
         <nav class="sticky">
             <div class="row">
                 <ion-icon name="body-outline" class="icon-logo-big"></ion-icon>
-                
+
                 <ul class="main-nav">
-                    <li><a href="all-posts.html">Naujienos</a></li>
-                    <li><a href="#">Renginiai</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-action="Index" asp-controller="Article">Naujienos</a></li>
+                        <li><a href="#">Renginiai</a></li>
+                    }
                     <partial name="_LoginPartial" />
                 </ul>
             </div>

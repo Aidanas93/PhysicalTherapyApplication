@@ -1,53 +1,48 @@
 ﻿@model IEnumerable<PhysicalTherapyProjectV2.Models.Post>
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-<a asp-action="Create">Create</a>
+<section class="section-features" style="padding-top:30px;">
+    <div class="flex-row">
+
+        <div class="empty-item-1"></div>
+        <div class="main-item-3">
 
 
-@if (TempData["message"] != null)
-{
-    <div class="alert alert-success">
-        <p>@TempData["message"]</p>
+            <h2 class="header-underline" style="font-size:2em;">Naujausi Įrašai</h2>
+            @foreach (var post in Model)
+            {
+                if (post.isForAuthenticatedUser == false)
+                {
+                    var item = post.Body.Length <= 500 ? post.Body : post.Body.Substring(0, 500) + "...";
+
+                    <div class="index-post post" onmouseover="highlightPost(this)" onmouseout="removeHighlight(this)">
+                        <h2>@post.Title</h2>
+                        <div>
+                            <p>
+                                <span class="post-person"><ion-icon name="person-circle-outline"></ion-icon>@post.CreatedBy</span>
+                                <span class="post-date"><ion-icon name="calendar-outline"></ion-icon>@post.CreatedOn.ToString("yyyy-MM-dd HH:mm")</span>
+                            </p>
+                        </div>
+                        <div class="clear" style="margin-bottom:5px;"></div>
+                        <p class="post-body">@item</p>
+                        <a class="btn btn-ghost post-btn" asp-action="Get" asp-controller="Article" asp-route-id="@post.Id">Daugiau</a>
+                    </div>
+                }
+            }
+
+
+        </div>
+        <div class="empty-item-3"></div>
+
+
     </div>
-}
+</section>
 
 
 
-<table class="table table-striped table-bordered table-sm">
-    <tr>
-        <th class="text-right">ID</th>
-        <th>Title</th>
-        <th class="text-right">Body</th>
-        <th class="text-center">Created On</th>
-        <th class="text-center"></th>
-        <th class="text-center"></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-<tr>
-    <td class="text-right">@item.Id</td>
-    <td>@item.Title</td>
-    <td class="text-right">@item.Body</td>
-    <td class="text-right">@item.CreatedOn</td>
-    <td class="text-center">
 
-        <a asp-action="Edit" class="btn btn-sm btn-warning"
-           asp-route-id="@item.Id">
-            Edit
-        </a>
-    </td>
-    <td>
-        
-        <form asp-action="Delete" method="post" asp-route-id="@item.Id">
-            <button type="submit" class="btn btn-danger btn-sm">
-                Delete
-            </button>
-        </form>
-    </td>
-</tr>
-    }
-</table>
+
 

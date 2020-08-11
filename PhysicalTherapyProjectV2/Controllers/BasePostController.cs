@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProjectV2.Models;
@@ -8,6 +9,7 @@ using PhysicalTherapyProjectV2.Services.Interfaces;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
+
     public abstract class BasePostController : BaseCrudController<Post>
     {
         protected IPostService postService;
