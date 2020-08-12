@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,20 +10,21 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" type="text/css" href="~/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="~/css/admin-panel-styles.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main-style.css">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html">Start Bootstrap</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
-            <i class="fas fa-bars"></i>
-        </button><!-- Navbar Search-->
+        <h3 class="navbar-brand">
+            Administratoriaus Panelė
+        </h3>
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <div class="input-group">
 
                 <div class="input-group-append">
-                    <a asp-action="Index" asp-controller="Home" class="btn btn-primary" type="button">Sugrįžti į pagrindinį puslapį</a>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-full" type="button">Sugrįžti į pagrindinį puslapį</a>
                 </div>
             </div>
         </form>
@@ -41,19 +45,23 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="index.html">
+                        <div class="sb-sidenav-menu-heading">Vaizdas Iš Viršaus</div>
+                        <a class="nav-link" asp-action="Index">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
+                            Apžvalga
                         </a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-sidenav-menu-heading">Veiksmai</div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts"
+                           aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Layouts
+                            Mokėjimai
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="layout-static.html">Static Navigation</a><a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a></nav>
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Visi</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Nauji</a>
+                            </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -62,17 +70,28 @@
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" aria-expanded="false" asp-action="CreateArticle">
-                                    Kurti Naują
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
-                                </a>
                                 <a class="nav-link" aria-expanded="false" asp-action="ListArticle">
-                                    Peržiūrėti Esamas
+                                    Peržiūrėti Straipsnius
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
                                 </a>
+                                <a class="nav-link" aria-expanded="false" asp-action="CreateArticle">
+                                    Kurti Straipsnį
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
+                                </a>
+
+                                <a class="nav-link" aria-expanded="false" asp-action="ListEvent">
+                                    Peržiūrėti Renginius
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
+                                </a>
+                                <a class="nav-link" aria-expanded="false" asp-action="CreateEvent">
+                                    Kurti Renginį
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
+                                </a>
+
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
+
+                        <div class="sb-sidenav-menu-heading">Papildymai</div>
                         <a class="nav-link" href="charts.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
@@ -82,26 +101,17 @@
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
-                </div>
+                @if (User.Identity.Name != null)
+                {
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Jūs esate prisijungęs kaip:</div>
+                        @User.Identity.Name.ToLower()
+                    </div>
+                }
             </nav>
         </div>
         @RenderBody()
     </div>
-    <footer class="py-4 bg-light mt-auto">
-        <div class="container-fluid">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; Your Website 2019</div>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    &middot;
-                    <a href="#">Terms &amp; Conditions</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -5,11 +5,11 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li>
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Sveiki, @User.Identity.Name.ToLower()!</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Sveiki, @UserManager.GetUserAsync(User).Result.Name!</a>
     </li>
     <li>
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" class="nav-link btn btn-link text-dark">Atsijungti</button>
+            <button type="submit" class="nav-link text-dark">Atsijungti</button>
         </form>
     </li>
 }

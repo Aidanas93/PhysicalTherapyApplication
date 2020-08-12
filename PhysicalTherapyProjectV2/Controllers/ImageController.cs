@@ -17,7 +17,7 @@ namespace PhysicalTherapyProjectV2.Controllers
             imageService = _imageService;
         }
 
-        public async Task<IActionResult> RenderAsync(int id)
+        public async Task<IActionResult> Render(int id)
         {
             var image = await imageService.GetByIdAsync(id);
 

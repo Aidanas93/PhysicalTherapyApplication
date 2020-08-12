@@ -8,7 +8,7 @@ namespace PhysicalTherapyProjectV2.Infrastructure
     enum PostTypes
     {
         Article = 1,
-        Comment = 2,
+        Event = 2,
         Advertisment = 3
     }
 }

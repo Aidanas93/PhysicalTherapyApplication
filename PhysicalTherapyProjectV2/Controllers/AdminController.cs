@@ -30,16 +30,18 @@ namespace PhysicalTherapyProjectV2.Controllers
             return View(await _userService.GetAllAsync());
         }
 
-        public async Task<IActionResult> ListArticle() =>
-            View(await _postService.GetAllByTypeAsync((int)PostTypes.Article));
+        [HttpGet]
+        public async Task<IActionResult> ListEvent()
+            => View(await _postService.GetAllByTypeAsync((int)PostTypes.Event));
 
-        public IActionResult CreateArticle() => View(new PostViewModel
+        [HttpGet]
+        public IActionResult CreateEvent() => View(new PostViewModel
         {
-            Post = new Post()
+            Post = new Post() { PostTypeId = 2 }
         });
 
         [HttpPost]
-        public async Task<IActionResult> CreateArticle(PostViewModel viewmodel)
+        public async Task<IActionResult> CreateEvent(PostViewModel viewmodel)
         {
             if (!ModelState.IsValid)
             {
@@ -57,17 +59,84 @@ namespace PhysicalTherapyProjectV2.Controllers
                 }
             }
 
-            viewmodel.Post.PostTypeId = 1;
             if (viewmodel.Post.Id == 0)
             {
 
                 var created_ent = await _genericService.InsertAsync(viewmodel.Post);
-                TempData["message"] = $"{created_ent} buvo sukurtas!";
+                TempData["message"] = $"Renginys: '{created_ent}' buvo sukurtas!";
             }
             else
             {
                 var updated_ent = await _genericService.UpdateAsync(viewmodel.Post);
-                TempData["message"] = $"{updated_ent} buvo redaguotas!";
+                TempData["message"] = $"Renginys: '{updated_ent}' buvo redaguotas!";
+            }
+
+            return RedirectToAction(nameof(ListEvent));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditEvent(int id) =>
+            View(nameof(CreateEvent), new PostViewModel()
+            {
+                Post = await _genericService.GetByIdAsync(id)
+            });
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteEvent(int id)
+        {
+            var article = await _genericService.GetByIdAsync(id);
+            await _genericService.DeleteAsync(id);
+            TempData["message"] = $"Renginys '{article.Title}' buvo ištrintas!";
+            return RedirectToAction(nameof(ListEvent));
+        }
+
+        public async Task<IActionResult> ListArticle() =>
+            View(await _postService.GetAllByTypeAsync((int)PostTypes.Article));
+
+        public IActionResult CreateArticle() => View(new PostViewModel
+        {
+            Post = new Post() { PostTypeId = 1 }
+        });
+
+        [HttpPost]
+        public async Task<IActionResult> CreateArticle(PostViewModel viewmodel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(ModelState);
+            }
+
+            if (viewmodel.Files != null)
+            {
+                try
+                {
+                    ImageParser imageParser = new ImageParser();
+
+                    var imageList = imageParser.ConvertToBytes(viewmodel.Files);
+                    foreach (var image in imageList)
+                    {
+                        viewmodel.Post.Images.Add(new Image { Content = image });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("File Error", ex.Message);
+                    return View(ModelState);
+                }
+
+            }
+
+            if (viewmodel.Post.Id == 0)
+            {
+
+                var created_ent = await _genericService.InsertAsync(viewmodel.Post);
+                TempData["message"] = $"Straipsnis: '{created_ent}' buvo sukurtas!";
+            }
+            else
+            {
+                var updated_ent = await _genericService.UpdateAsync(viewmodel.Post);
+                TempData["message"] = $"Straipsnis: '{updated_ent}' buvo redaguotas!";
             }
 
             return RedirectToAction(nameof(ListArticle));
@@ -86,7 +155,7 @@ namespace PhysicalTherapyProjectV2.Controllers
         {
             var article = await _genericService.GetByIdAsync(id);
             await _genericService.DeleteAsync(id);
-            TempData["message"] = $"Straipsnis \"{article.Title}\" buvo ištrintas!";
+            TempData["message"] = $"Straipsnis '{article.Title}' buvo ištrintas!";
             return RedirectToAction(nameof(ListArticle));
         }
 

@@ -1,14 +1,14 @@
 ﻿@model PostViewModel
 @{
-    ViewData["Title"] = "Parašyti Naujieną";
+    ViewData["Title"] = "Sukurti Renginį";
     Layout = "_AdminLayout";
 }
 
 <div id="layoutSidenav_content">
     <div style="margin:10px">
-        <h1 class="mt-4">Parašyti Naujieną</h1>
+        <h1 class="mt-4">Sukurti Renginį</h1>
 
-        <form asp-action="CreateArticle" method="post" enctype="multipart/form-data">
+        <form asp-action="CreateEvent" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Post.Id" />
             <input type="hidden" asp-for="Post.PostTypeId" />
             <div asp-validation-summary="All" class="text-danger"></div>
@@ -19,18 +19,18 @@
             </div>
 
             <div class="form-group">
-                <label>Nuotraukos:</label>
-                <input type="file" asp-for="Files" multiple="multiple" />
+                <label asp-for="Post.Date">Renginio Data:</label>
+                <input type="text" class="form-control" asp-for="Post.Date" />
             </div>
 
             <div class="form-group">
-                <label asp-for="Post.Body">Turinys:</label>
-                <input type="text" class="form-control" asp-for="Post.Body" />
+                <label>Nuotraukos:</label>
+                <input type="file" asp-for="Files" />
             </div>
 
-            <div class="form-group d-inline">
-                <label asp-for="Post.isForAuthenticatedUser">Turinys Registruotiems Vartotojams?</label>
-                <input type="checkbox" asp-for="Post.isForAuthenticatedUser" />
+            <div class="form-group">
+                <label asp-for="Post.Body">Aprašymas:</label>
+                <input type="text" class="form-control" asp-for="Post.Body" />
             </div>
 
             <div>

@@ -22,11 +22,8 @@ namespace PhysicalTherapyProjectV2.Infrastructure
 
             if (IsValidExtension(fileExtension))
             {
-                using (var memoryStream = new MemoryStream())
-                {
-                    file.CopyToAsync(memoryStream);
-                    return memoryStream.ToArray();
-                }
+                BinaryReader reader = new BinaryReader(file.OpenReadStream());
+                return reader.ReadBytes((int)file.Length);
             }
             else
             {

@@ -8,7 +8,7 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid">
-            <h1 class="mt-4">Dashboard</h1>
+            <h1 class="mt-4">Apžvalga</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
@@ -57,7 +57,7 @@
             }
 
             <div class="card mb-4">
-                <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable Example</div>
+                <div class="card-header"><i class="fas fa-table mr-1"></i>Svetainės Vartotojai</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -78,7 +78,6 @@
                                     <th>El. Paštas</th>
                                     <th>Pareigos</th>
                                     <th>Ar Patvirtintas</th>
-                                    <th></th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -89,9 +88,12 @@
                                         <td>@user.Surname</td>
                                         <td>@user.Email</td>
                                         <td>@user.Occupation.Name</td>
-                                        <td>@(user.IsConfirmed == true ? "Patvirtintas" : "Nepatvirtintas")</td>
                                         <td>
-                                            @if (user.IsConfirmed == false)
+                                            @if (user.IsConfirmed == true)
+                                            {
+                                                <p>Patvirtintas</p>
+                                            }
+                                            else if (user.IsConfirmed == false)
                                             {
                                                 <form asp-action="ConfirmUser" asp-controller="Admin" asp-route-userId="@user.Id" method="post">
                                                     <input class="btn btn-primary btn-block" type="submit" value="Patvirtinti" />

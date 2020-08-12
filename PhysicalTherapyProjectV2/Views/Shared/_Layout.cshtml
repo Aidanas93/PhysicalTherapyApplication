@@ -27,8 +27,13 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a asp-action="Index" asp-controller="Article">Naujienos</a></li>
-                        <li><a href="#">Renginiai</a></li>
+                        <li><a asp-action="Index" asp-controller="Event">Renginiai</a></li>
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            <li><a asp-action="Index" asp-controller="Admin">Admin</a></li>
+                        }
                     }
+
                     <partial name="_LoginPartial" />
                 </ul>
             </div>

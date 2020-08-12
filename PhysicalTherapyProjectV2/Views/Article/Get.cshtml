@@ -17,6 +17,14 @@
                         <span class="post-date"><ion-icon name="calendar-outline"></ion-icon>@Model.CreatedOn.ToString("yyyy-MM-dd HH:mm")</span>
                     </p>
                 </div>
+                @if (Model.Images != null)
+                {
+                    foreach (var image in Model.Images)
+                    {
+                        <img src="@Url.Action("Render", "Image", new { id = image.Id })" style="width:400px;" />
+
+                    }
+                }
                 <div class="clear" style="margin-bottom:5px;"></div>
                 <p class="post-body">@Model.Body</p>
 
@@ -26,20 +34,4 @@
     </div>
 </section>
 
-@*<h1>@Model.Title</h1>
-    <p>@Model.CreatedOn</p>
-
-
-    @foreach (var image in Model.Images)
-    {
-        <img src="@Url.Action("Render", "Image", new { id = image.Id })" style="width:200px;" />
-
-    }
-
-
-
-
-
-
-    <p>@Model.Body</p>*@
 

@@ -79,11 +79,10 @@ html {
 .flex-row {
     display: flex;
     flex-direction: row;
-
 }
 
-.clear{
-    clear:both;
+.clear {
+    clear: both;
 }
 /*#endregion Reusable Components*/
 
@@ -106,33 +105,32 @@ html {
     background: #d3d6d5;
 }
 
-.post-body{
-    text-align:left;
+.post-body {
+    text-align: left;
 }
 
 
-.post-person{
-   float:left;
+.post-person {
+    float: left;
 }
 
 .post-date {
-    float:right;
+    float: right;
 }
 
 .index-post {
     padding: 20px 10px;
 }
 
-.index-post h2 {
-    margin-top: 50px;
-    margin-bottom: 10px;
-    text-transform:none;
+    .index-post h2 {
+        margin-top: 50px;
+        margin-bottom: 10px;
+        text-transform: none;
+    }
 
-}
-
-.index-post a {
-    margin:8px 0;
-}
+    .index-post a {
+        margin: 8px 0;
+    }
 
 
 
@@ -316,12 +314,11 @@ h2 {
     padding: 30px;
     font-size: 0.8em;
     text-align: center;
-
 }
 
 
-.contact{
-    display:inline-block;
+.contact {
+    display: inline-block;
 }
 
     .contact p {
@@ -358,10 +355,10 @@ h2 {
             color: #ddd;
         }
 
-        .footer .contact a {
-            text-decoration:none;
-            color:#555;
-        }
+.footer .contact a {
+    text-decoration: none;
+    color: #555;
+}
 
 .facebook-icon {
     -webkit-transition: color 0.2s;
@@ -388,33 +385,33 @@ footer p {
 /* ----------------------------------------------- */
 
 /*#region Privacy*/
-.privacy-container{
-    display:flex;
-    flex-direction:row;
-
+.privacy-container {
+    display: flex;
+    flex-direction: row;
 }
 
-.privacy-policy .list{
-    padding-left:30px;
+.privacy-policy .list {
+    padding-left: 30px;
 }
 
-.privacy-policy h1{
-    text-align:center;
+.privacy-policy h1 {
+    text-align: center;
 }
+
 .privacy-policy h3 {
     text-align: center;
-    font-size:1.5em;
-    margin-top:30px;
+    font-size: 1.5em;
+    margin-top: 30px;
 }
 
 .privacy-policy h1:after {
-        display: block;
-        height: 2px;
-        background-color: #1abc9c;
-        content: " ";
-        width: 200px;
-        margin: 0 auto;
-        margin-top: 30px;
+    display: block;
+    height: 2px;
+    background-color: #1abc9c;
+    content: " ";
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 30px;
 }
 
 .privacy-policy h2:after {
@@ -431,13 +428,12 @@ footer p {
     font-weight: 600;
     margin: 50px 0 15px 0;
     font-size: 1.2em;
-    text-align:center;
+    text-align: center;
 }
 
 .privacy-policy {
     margin: 80px 0;
     flex: 2;
- 
 }
 /*#endregion privacy*/
 
