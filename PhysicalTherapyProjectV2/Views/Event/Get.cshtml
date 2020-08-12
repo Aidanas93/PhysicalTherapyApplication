@@ -4,32 +4,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <section class="section-features" style="padding-top:30px;">
-        <div class="flex-row">
-            <div class="empty-item-1"></div>
-            <div class="main-item-3">
-
-                <div class="index-post post">
-                    <h2 class="header-underline" style="font-size:2em;">@Model.Title</h2>
-                    <div>
-                        <p>
-                            <span class="post-person"><ion-icon name="person-circle-outline"></ion-icon>@Model.CreatedBy</span>
-                            <span class="post-date"><ion-icon name="calendar-outline"></ion-icon>@Model.Date</span>
-                        </p>
-                    </div>
-                    @if (Model.Images != null)
-                    {
-                        foreach (var image in Model.Images)
-                        {
-                            <img src="@Url.Action("Render", "Image", new { id = image.Id })" style="width:400px;" />
-
-                        }
-                    }
-                    <div class="clear" style="margin-bottom:5px;"></div>
-                    <p class="post-body">@Model.Body</p>
-
+<section class="section-features" style="padding-top:30px;">
+    <div class="flex-row">
+        <div class="empty-item-1"></div>
+        <div class="main-item-3">
+            <div class="index-post post">
+                <h2 class="header-underline" style="font-size:2em;">@Model.Title</h2>
+                <div>
+                    <p>
+                        <span class="post-person"><ion-icon name="person-circle-outline"></ion-icon>@Model.Title</span>
+                        <span class="post-date"><ion-icon name="calendar-outline"></ion-icon>@Model.CreatedOn.ToString("yyyy-MM-dd HH:mm")</span>
+                    </p>
                 </div>
+                <p class="card-text">@Model.Body</p>
+
+
+                @{
+                    @if (Model.Images.Count > 0)
+                    {
+                        <img class="card-img-top" src="@Url.Action("Render", "Image", new { id = Model.Images.First().Id })">
+
+                    }
+                }
             </div>
             <div class="empty-item-3"></div>
         </div>
-    </section>
+    </div>
+</section>

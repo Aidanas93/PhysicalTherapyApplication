@@ -1,13 +1,20 @@
-﻿.btn:focus, .btn:active, button:focus, button:active {
-    outline: none !important;
-    box-shadow: none !important;
+﻿div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
 }
 
-#image-gallery .modal-footer {
-    display: block;
-}
+    div.gallery:hover {
+        border: 1px solid #777;
+    }
 
-.thumb {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    div.gallery img {
+        width: 100%;
+        height: auto;
+    }
+
+div.desc {
+    padding: 15px;
+    text-align: center;
 }

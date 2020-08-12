@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhysicalTherapyProjectV2.Infrastructure;
@@ -22,7 +23,14 @@ namespace PhysicalTherapyProjectV2.Controllers
         }
 
         [HttpGet]
-        public async override Task<ActionResult> Index() => View(await postService.GetAllByTypeAsync(postType));
+        public async override Task<ActionResult> Index()
+        {
+            var posts = await postService.GetAllByTypeAsync(postType);
+            posts = posts.OrderByDescending(x => x.CreatedOn).ToList();
+            return View(posts);
+        }
+
+
 
         [HttpGet]
         public override ActionResult Create() => View(new PostViewModel

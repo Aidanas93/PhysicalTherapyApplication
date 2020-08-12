@@ -8,7 +8,7 @@ using PhysicalTherapyProjectV2.Services.Interfaces;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
-    public abstract class BaseCrudController<T> : Controller 
+    public abstract class BaseCrudController<T> : Controller
         where T : class, IEntity, new()
     {
         protected IGenericService<T> genericService;
@@ -34,8 +34,8 @@ namespace PhysicalTherapyProjectV2.Controllers
                 return View();
 
             }
-            
-            if(entity.Id == 0)
+
+            if (entity.Id == 0)
             {
                 var created_ent = await genericService.InsertAsync(entity);
                 TempData["message"] = $"{created_ent} buvo sukurtas!";
@@ -60,7 +60,7 @@ namespace PhysicalTherapyProjectV2.Controllers
         {
             var entity = await genericService.DeleteAsync(id);
 
-            if(entity != null)
+            if (entity != null)
             {
                 TempData["message"] = $"{entity} buvo ištrintas!";
             }

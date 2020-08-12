@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<PhysicalTherapyProjectV2.Models.Post>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Būsimi Renginiai";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,26 +13,29 @@
 
             <h2 class="header-underline" style="font-size:2em;">Būsimi Renginiai:</h2>
 
-            @foreach (var post in Model)
-            {
-                if (post.isForAuthenticatedUser == false)
+            <div style="display:flex;flex-direction:row;">
+                @foreach (var post in Model)
                 {
-                    var item = post.Body.Length <= 500 ? post.Body : post.Body.Substring(0, 500) + "...";
+                    @if (post.Date > DateTime.Now)
+                    {
+                        var item = post.Body.Length <= 100 ? post.Body : post.Body.Substring(0, 100) + "...";
+                        <div class="card" style="width: 18rem;margin:10px;">
+                            @if (post.Images.Count > 0)
+                            {
+                                <img class="card-img-top" src="@Url.Action("Render", "Image", new { id = post.Images.First().Id })">
 
-                    <div class="index-post post" onmouseover="highlightPost(this)" onmouseout="removeHighlight(this)">
-                        <h2>@post.Title</h2>
-                        <div>
-                            <p>
-                                <span class="post-person"><ion-icon name="person-circle-outline"></ion-icon>@post.CreatedBy</span>
-                                <span class="post-date"><ion-icon name="calendar-outline"></ion-icon>@post.Date</span>
-                            </p>
+                            }
+
+                            <div class="card-body">
+                                <h5 class="card-title">@post.Title</h5>
+                                <small class="card-subtitle">@post.Date</small>
+                                <p class="card-text">@item</p>
+                                <a asp-action="Get" asp-route-id="@post.Id" class="btn btn-ghost">Daugiau</a>
+                            </div>
                         </div>
-                        <div class="clear" style="margin-bottom:5px;"></div>
-                        <p class="post-body">@item</p>
-                        <a class="btn btn-ghost post-btn" asp-action="Get" asp-route-id="@post.Id">Daugiau</a>
-                    </div>
+                    }
                 }
-            }
+            </div>
 
 
         </div>

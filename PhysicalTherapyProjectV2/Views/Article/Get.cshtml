@@ -17,17 +17,25 @@
                         <span class="post-date"><ion-icon name="calendar-outline"></ion-icon>@Model.CreatedOn.ToString("yyyy-MM-dd HH:mm")</span>
                     </p>
                 </div>
-                @if (Model.Images != null)
-                {
-                    foreach (var image in Model.Images)
-                    {
-                        <img src="@Url.Action("Render", "Image", new { id = image.Id })" style="width:400px;" />
 
-                    }
-                }
+
+
                 <div class="clear" style="margin-bottom:5px;"></div>
                 <p class="post-body">@Model.Body</p>
+                @if (Model.Images != null)
+                {
+                    <div class="gallery" >
 
+                        @foreach (var image in Model.Images)
+                        {
+                            <a target="_blank" asp-action="Render" asp-controller="Image" asp-route-id="@image.Id ">
+                                <img src="@Url.Action("Render", "Image", new { id = image.Id })"
+                                     alt="@image.CreatedOn" width="600" height="400">
+                            </a>
+
+                        }
+                    </div>
+                }
             </div>
         </div>
         <div class="empty-item-3"></div>
