@@ -6,21 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
-    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
-    <Compile Remove="Data\Migrations\20200425093933_addsInitialMigration.cs" />
-    <Compile Remove="Data\Migrations\20200425093933_addsInitialMigration.Designer.cs" />
-    <Compile Remove="Data\Migrations\20200425111635_ChangedIdentityPrimaryKeyToInteger.cs" />
-    <Compile Remove="Data\Migrations\20200425111635_ChangedIdentityPrimaryKeyToInteger.Designer.cs" />
-    <Compile Remove="Migrations\20200518111638_SeedPostArticleTable.cs" />
-    <Compile Remove="Migrations\20200518111638_SeedPostArticleTable.Designer.cs" />
-    <Compile Remove="Migrations\20200518112012_Test.cs" />
-    <Compile Remove="Migrations\20200518112012_Test.Designer.cs" />
-    <Compile Remove="Migrations\20200811074000_changes.cs" />
-    <Compile Remove="Migrations\20200811074000_changes.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
@@ -32,10 +17,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

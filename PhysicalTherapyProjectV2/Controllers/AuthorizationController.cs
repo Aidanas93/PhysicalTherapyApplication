@@ -1,33 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using PhysicalTherapyProject.Domain.Models;
+using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProjectV2.Models;
 using PhysicalTherapyProjectV2.Models.DTO;
-using PhysicalTherapyProjectV2.Services.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private readonly IMapper mapper;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IUserService<ApplicationUser> userService;
+        private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserRepository _userRepository;
         public AuthorizationController(IMapper mapper, UserManager<ApplicationUser> userManager,
-                               SignInManager<ApplicationUser> signInManager, IUserService<ApplicationUser> userService)
+                               SignInManager<ApplicationUser> signInManager, IUserRepository userRepository)
         {
-            this.mapper = mapper;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.userService = userService;
+            _mapper = mapper;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _userRepository = userRepository;
         }
         public IActionResult Registration()
         {
@@ -42,9 +39,9 @@ namespace PhysicalTherapyProjectV2.Controllers
                 return View(userModel);
             }
 
-            var user = mapper.Map<ApplicationUser>(userModel);
+            var user = _mapper.Map<ApplicationUser>(userModel);
 
-            var result = await userManager.CreateAsync(user, userModel.Password);
+            var result = await _userManager.CreateAsync(user, userModel.Password);
 
             if (!result.Succeeded)
             {
@@ -73,9 +70,9 @@ namespace PhysicalTherapyProjectV2.Controllers
                 return View(loginModel);
             }
 
-            var user = await userService.GetByEmailAsync(loginModel.Email);
+            var user = await _userRepository.GetByEmailAsync(loginModel.Email);
 
-            var result = await signInManager.PasswordSignInAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe, false);
+            var result = await _signInManager.PasswordSignInAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe, false);
 
             if (!result.Succeeded)
             {
@@ -99,12 +96,12 @@ namespace PhysicalTherapyProjectV2.Controllers
             if (ModelState.IsValid)
             {
                 // Find the user by email
-                var user = await userManager.FindByEmailAsync(model.Email);
+                var user = await _userManager.FindByEmailAsync(model.Email);
                 // If the user is found AND Email is confirmed
                 if (user != null)
                 {
                     // Generate the reset password token
-                    var token = await userManager.GeneratePasswordResetTokenAsync(user);
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
                     // Build the password reset link
                     var passwordResetLink = Url.Action(nameof(ResetPassword), "Authorization",
@@ -142,12 +139,12 @@ namespace PhysicalTherapyProjectV2.Controllers
             if (ModelState.IsValid)
             {
                 // Find the user by email
-                var user = await userManager.FindByEmailAsync(model.Email);
+                var user = await _userManager.FindByEmailAsync(model.Email);
 
                 if (user != null)
                 {
                     // reset the user password
-                    var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
+                    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
                     if (result.Succeeded)
                     {
                         return View(nameof(ResetPasswordConfirmation));

@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhysicalTherapyProject.Domain.Models;
-using PhysicalTherapyProjectV2.Services.Interfaces;
+using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using System.Threading.Tasks;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
     public class ImageController : Controller
     {
-        private readonly IGenericService<Image> imageService;
-        public ImageController(IGenericService<Image> _imageService)
+        private readonly IGenericRepository<Image> _imageRepository;
+        public ImageController(IGenericRepository<Image> imageRepository)
         {
-            imageService = _imageService;
+            _imageRepository = imageRepository;
         }
 
         public async Task<IActionResult> Render(int id)
         {
-            var image = await imageService.GetByIdAsync(id);
+            var image = await _imageRepository.GetByIdAsync(id);
 
             if (image == null)
             {

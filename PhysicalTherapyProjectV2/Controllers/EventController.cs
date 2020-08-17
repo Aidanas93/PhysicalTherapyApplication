@@ -1,13 +1,11 @@
-﻿using PhysicalTherapyProject.Domain.Models;
+﻿using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Services.Interfaces;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
     public class EventController : BasePostController
     {
-        public EventController(IPostService _postService, IGenericService<Post> postGeneric) :
-            base(_postService, postGeneric, (int)PostTypes.Event)
+        public EventController(IPostRepository _postRepository) : base(_postRepository, (int)PostTypes.Event)
         { }
     }
 }

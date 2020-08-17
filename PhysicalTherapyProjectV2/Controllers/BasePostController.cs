@@ -1,38 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhysicalTherapyProject.Domain.Models;
+using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProjectV2.Models.ViewModel;
-using PhysicalTherapyProjectV2.Services.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
 
-    public abstract class BasePostController : BaseCrudController<Post>
+    public abstract class BasePostController : Controller
     {
-        protected IPostService postService;
+        protected IPostRepository _postRepository;
         private int postType;
 
-        public BasePostController(IPostService _postService, IGenericService<Post> genericService, int _postType) : base(genericService)
+        public BasePostController(IPostRepository postRepository, int _postType)
         {
-            postService = _postService;
+            _postRepository = postRepository;
             postType = _postType;
         }
 
         [HttpGet]
-        public async override Task<ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
-            var posts = await postService.GetAllByTypeAsync(postType);
+            var posts = await _postRepository.GetAllByTypeAsync(postType);
             posts = posts.OrderByDescending(x => x.CreatedOn).ToList();
             return View(posts);
         }
 
-
-
         [HttpGet]
-        public override ActionResult Create() => View(new PostViewModel
+        public ActionResult Create() => View(new PostViewModel
         {
             Post = new Post()
         });
@@ -57,12 +54,12 @@ namespace PhysicalTherapyProjectV2.Controllers
             if (viewModel.Post.Id == 0)
             {
 
-                var created_ent = await genericService.InsertAsync(viewModel.Post);
+                var created_ent = await _postRepository.InsertAsync(viewModel.Post);
                 TempData["message"] = $"{created_ent} buvo sukurtas!";
             }
             else
             {
-                var updated_ent = await genericService.UpdateAsync(viewModel.Post);
+                var updated_ent = await _postRepository.UpdateAsync(viewModel.Post);
                 TempData["message"] = $"{updated_ent} buvo redaguotas!";
             }
 
@@ -70,12 +67,26 @@ namespace PhysicalTherapyProjectV2.Controllers
         }
 
         [HttpGet]
-        public override async Task<IActionResult> Edit(int id) =>
+        public async Task<IActionResult> Edit(int id) =>
             View(nameof(Create), new PostViewModel()
             {
-                Post = await genericService.GetByIdAsync(id)
+                Post = await _postRepository.GetByIdAsync(id)
             });
 
+        [HttpGet]
+        public async Task<ActionResult> Get(int id) => View(await _postRepository.GetByIdAsync(id));
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var entity = await _postRepository.DeleteAsync(id);
+
+            if (entity != null)
+            {
+                TempData["message"] = $"{entity} buvo ištrintas!";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

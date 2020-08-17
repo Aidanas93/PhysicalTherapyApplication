@@ -3,31 +3,20 @@ using PhysicalTherapyProject.Domain.Infrastructure.Interfaces;
 using PhysicalTherapyProject.Persistance.Data;
 using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhysicalTherapyProject.Persistance.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericService<TEntity> where TEntity : class, IEntity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IEntity
     {
-        private readonly ApplicationDbContext _applicationDbContext;
-        private DbSet<TEntity> entities;
+        protected readonly ApplicationDbContext _applicationDbContext;
+        protected DbSet<TEntity> entities;
 
         public GenericRepository(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
             entities = _applicationDbContext.Set<TEntity>();
-        }
-
-        private IQueryable<TEntity> Query()
-        {
-            var query = entities.AsQueryable();
-            foreach (var property in _applicationDbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
-            {
-                query = query.Include(property.Name);
-            }
-            return query;
         }
 
         public async Task<TEntity> GetByIdAsync(int id) =>
@@ -65,5 +54,14 @@ namespace PhysicalTherapyProject.Persistance.Repositories
             return dbEntry;
         }
 
+        protected IQueryable<TEntity> Query()
+        {
+            var query = entities.AsQueryable();
+            foreach (var property in _applicationDbContext.Model.FindEntityType(typeof(TEntity)).GetNavigations())
+            {
+                query = query.Include(property.Name);
+            }
+            return query;
+        }
     }
 }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PhysicalTherapyProjectV2.Services.Interfaces
+namespace PhysicalTherapyProject.Persistance.Infrastructure.Interfaces
 {
-    public interface IGenericService<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         Task<T> GetByIdAsync(int id);
         Task<ICollection<T>> GetAllAsync();

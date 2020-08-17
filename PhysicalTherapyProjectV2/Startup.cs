@@ -1,24 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PhysicalTherapyProjectV2.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PhysicalTherapyProjectV2.Models;
-using PhysicalTherapyProjectV2.Services.Interfaces;
-using PhysicalTherapyProjectV2.Services;
-using AutoMapper;
-using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProject.Persistance.Data;
+using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
+using PhysicalTherapyProject.Persistance.Repositories;
+using PhysicalTherapyProjectV2.Infrastructure;
 
 namespace PhysicalTherapyProjectV2
 {
@@ -34,12 +26,9 @@ namespace PhysicalTherapyProjectV2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IGenericService<Post>, PostService>();
-            services.AddScoped<IPostService, PostService>();
-            services.AddScoped<IGenericService<Image>, ImageService>();
-            services.AddScoped<IGenericService<ApplicationUser>, UserService>();
-            services.AddScoped<IUserService<ApplicationUser>, UserService>();
-
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IGenericRepository<Image>, GenericRepository<Image>>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAutoMapper(typeof(MapProfile));
             services.AddDbContext<ApplicationDbContext>(options =>

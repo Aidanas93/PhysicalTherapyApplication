@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PhysicalTherapyProject.Persistance.Infrastructure.Interfaces
 {
-    public interface IPostService
+    public interface IUserRepository : IGenericRepository<ApplicationUser>
     {
-        Task<ICollection<Post>> GetAllByTypeAsync(int id);
+        Task<ApplicationUser> GetByEmailAsync(string email);
     }
 }

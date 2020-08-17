@@ -1,12 +1,12 @@
 ﻿using PhysicalTherapyProject.Domain.Models;
+using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Services.Interfaces;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
     public class AdvertismentController : BasePostController
     {
-        public AdvertismentController(IPostService _postService, IGenericService<Post> postGeneric) : base(_postService, postGeneric, (int)PostTypes.Advertisment) { }
+        public AdvertismentController(IPostRepository _postRepository) : base(_postRepository, (int)PostTypes.Advertisment) { }
 
 
     }

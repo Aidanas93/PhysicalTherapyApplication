@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PhysicalTherapyProjectV2.Migrations
+namespace PhysicalTherapyProject.Persistance.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,23 @@ namespace PhysicalTherapyProjectV2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Occupation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    UpdatedOn = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    UpdatedBy = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Occupation", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,7 +151,7 @@ namespace PhysicalTherapyProjectV2.Migrations
                     Title = table.Column<string>(nullable: true),
                     Body = table.Column<string>(nullable: true),
                     isForAuthenticatedUser = table.Column<bool>(nullable: false),
-                    VideoLink = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
                     PostUserId = table.Column<int>(nullable: true),
                     PostTypeId = table.Column<int>(nullable: true)
                 },
@@ -193,7 +210,15 @@ namespace PhysicalTherapyProjectV2.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    ImageId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    ImageId = table.Column<int>(nullable: true),
+                    OccupationId = table.Column<int>(nullable: false),
+                    IsConfirmed = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    UpdatedOn = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    UpdatedBy = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -204,6 +229,43 @@ namespace PhysicalTherapyProjectV2.Migrations
                         principalTable: "Images",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Occupation_OccupationId",
+                        column: x => x.OccupationId,
+                        principalTable: "Occupation",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Occupation",
+                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Name", "UpdatedBy", "UpdatedOn" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(8467), "Studentas", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(8495) },
+                    { 2, null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(9755), "Dėstytojas", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(9791) },
+                    { 3, null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(9825), "Kineziterapeutas", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(9829) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PostTypes",
+                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Name", "UpdatedBy", "UpdatedOn" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2020, 8, 17, 11, 24, 58, 960, DateTimeKind.Local).AddTicks(469), "Article", null, new DateTime(2020, 8, 17, 11, 24, 58, 965, DateTimeKind.Local).AddTicks(4158) },
+                    { 2, null, new DateTime(2020, 8, 17, 11, 24, 58, 965, DateTimeKind.Local).AddTicks(7862), "Advertisment", null, new DateTime(2020, 8, 17, 11, 24, 58, 965, DateTimeKind.Local).AddTicks(7904) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Posts",
+                columns: new[] { "Id", "Body", "CreatedBy", "CreatedOn", "Date", "PostTypeId", "PostUserId", "Title", "UpdatedBy", "UpdatedOn", "isForAuthenticatedUser" },
+                values: new object[,]
+                {
+                    { 1, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(370), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, "What is Lorem Ipsum?", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(406), false },
+                    { 2, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(6791), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, "1914 translation by H. Rackham", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(6822), false },
+                    { 3, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(6902), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, "The standard Lorem Ipsum passage, used since the 1500s", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(6908), false },
+                    { 4, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(6915), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, "Where does it come from?", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(6919), false },
+                    { 5, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(6926), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, "Where can I get some?", null, new DateTime(2020, 8, 17, 11, 24, 58, 968, DateTimeKind.Local).AddTicks(6930), false }
                 });
 
             migrationBuilder.CreateIndex(
@@ -249,6 +311,11 @@ namespace PhysicalTherapyProjectV2.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_OccupationId",
+                table: "AspNetUsers",
+                column: "OccupationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_PostId",
@@ -335,6 +402,9 @@ namespace PhysicalTherapyProjectV2.Migrations
 
             migrationBuilder.DropTable(
                 name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "Occupation");
 
             migrationBuilder.DropTable(
                 name: "Posts");

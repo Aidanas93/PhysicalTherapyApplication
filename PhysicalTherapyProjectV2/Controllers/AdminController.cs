@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhysicalTherapyProject.Domain.Models;
+using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProjectV2.Models.ViewModel;
-using PhysicalTherapyProjectV2.Services.Interfaces;
 using System;
 using System.Threading.Tasks;
 
@@ -11,25 +11,23 @@ namespace PhysicalTherapyProjectV2.Controllers
     //[Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
-        private readonly IPostService _postService;
-        private readonly IGenericService<Post> _genericService;
-        private readonly IGenericService<ApplicationUser> _userService;
+        private readonly IPostRepository _postRepository;
+        private readonly IUserRepository _userRepository;
 
-        public AdminController(IPostService postService, IGenericService<Post> genericService, IGenericService<ApplicationUser> userService)
+        public AdminController(IPostRepository postRepository, IUserRepository userRepository)
         {
-            _postService = postService;
-            _genericService = genericService;
-            _userService = userService;
+            _postRepository = postRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _userService.GetAllAsync());
+            return View(await _userRepository.GetAllAsync());
         }
 
         [HttpGet]
         public async Task<IActionResult> ListEvent()
-            => View(await _postService.GetAllByTypeAsync((int)PostTypes.Event));
+            => View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Event));
 
         [HttpGet]
         public IActionResult CreateEvent() => View(new PostViewModel
@@ -59,12 +57,12 @@ namespace PhysicalTherapyProjectV2.Controllers
             if (viewmodel.Post.Id == 0)
             {
 
-                var created_ent = await _genericService.InsertAsync(viewmodel.Post);
+                var created_ent = await _postRepository.InsertAsync(viewmodel.Post);
                 TempData["message"] = $"Renginys: '{created_ent}' buvo sukurtas!";
             }
             else
             {
-                var updated_ent = await _genericService.UpdateAsync(viewmodel.Post);
+                var updated_ent = await _postRepository.UpdateAsync(viewmodel.Post);
                 TempData["message"] = $"Renginys: '{updated_ent}' buvo redaguotas!";
             }
 
@@ -75,21 +73,21 @@ namespace PhysicalTherapyProjectV2.Controllers
         public async Task<IActionResult> EditEvent(int id) =>
             View(nameof(CreateEvent), new PostViewModel()
             {
-                Post = await _genericService.GetByIdAsync(id)
+                Post = await _postRepository.GetByIdAsync(id)
             });
 
 
         [HttpPost]
         public async Task<IActionResult> DeleteEvent(int id)
         {
-            var article = await _genericService.GetByIdAsync(id);
-            await _genericService.DeleteAsync(id);
+            var article = await _postRepository.GetByIdAsync(id);
+            await _postRepository.DeleteAsync(id);
             TempData["message"] = $"Renginys '{article.Title}' buvo ištrintas!";
             return RedirectToAction(nameof(ListEvent));
         }
 
         public async Task<IActionResult> ListArticle() =>
-            View(await _postService.GetAllByTypeAsync((int)PostTypes.Article));
+            View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Article));
 
         public IActionResult CreateArticle() => View(new PostViewModel
         {
@@ -127,12 +125,12 @@ namespace PhysicalTherapyProjectV2.Controllers
             if (viewmodel.Post.Id == 0)
             {
 
-                var created_ent = await _genericService.InsertAsync(viewmodel.Post);
+                var created_ent = await _postRepository.InsertAsync(viewmodel.Post);
                 TempData["message"] = $"Straipsnis: '{created_ent}' buvo sukurtas!";
             }
             else
             {
-                var updated_ent = await _genericService.UpdateAsync(viewmodel.Post);
+                var updated_ent = await _postRepository.UpdateAsync(viewmodel.Post);
                 TempData["message"] = $"Straipsnis: '{updated_ent}' buvo redaguotas!";
             }
 
@@ -143,15 +141,15 @@ namespace PhysicalTherapyProjectV2.Controllers
         public async Task<IActionResult> EditArticle(int id) =>
         View(nameof(CreateArticle), new PostViewModel()
         {
-            Post = await _genericService.GetByIdAsync(id)
+            Post = await _postRepository.GetByIdAsync(id)
         });
 
 
         [HttpPost]
         public async Task<IActionResult> DeleteArticle(int id)
         {
-            var article = await _genericService.GetByIdAsync(id);
-            await _genericService.DeleteAsync(id);
+            var article = await _postRepository.GetByIdAsync(id);
+            await _postRepository.DeleteAsync(id);
             TempData["message"] = $"Straipsnis '{article.Title}' buvo ištrintas!";
             return RedirectToAction(nameof(ListArticle));
         }
@@ -159,9 +157,9 @@ namespace PhysicalTherapyProjectV2.Controllers
         [HttpPost]
         public async Task<IActionResult> ConfirmUser(int userId)
         {
-            var user = await _userService.GetByIdAsync(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
             user.IsConfirmed = true;
-            await _userService.UpdateAsync(user);
+            await _userRepository.UpdateAsync(user);
             TempData["message"] = $"{user.Name} {user.Surname} buvo patvirtintas!";
             return RedirectToAction(nameof(Index));
         }
@@ -169,8 +167,8 @@ namespace PhysicalTherapyProjectV2.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(int userId)
         {
-            var user = await _userService.GetByIdAsync(userId);
-            await _userService.DeleteAsync(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
+            await _userRepository.DeleteAsync(userId);
             TempData["message"] = $"{user.Name} {user.Surname} buvo ištrintas!";
             return RedirectToAction(nameof(Index));
         }

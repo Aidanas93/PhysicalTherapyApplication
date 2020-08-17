@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Models;
-using PhysicalTherapyProjectV2.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
     public class HomeController : Controller
     {
-        private IPostService genericService;
+        private IPostRepository _postRepository;
 
-        public HomeController(IPostService genericService)
+        public HomeController(IPostRepository postRepository)
         {
-            this.genericService = genericService;
+            this._postRepository = postRepository;
         }
 
-        public async Task<IActionResult> Index() => View(await genericService.GetAllByTypeAsync((int)PostTypes.Article));
+        public async Task<IActionResult> Index() => View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Article));
 
         public IActionResult Privacy() => View();
 
@@ -28,10 +22,5 @@ namespace PhysicalTherapyProjectV2.Controllers
 
         public IActionResult Partnership() => View();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
