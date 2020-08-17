@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProjectV2.Models;
 using PhysicalTherapyProjectV2.Models.DTO;
 using System;

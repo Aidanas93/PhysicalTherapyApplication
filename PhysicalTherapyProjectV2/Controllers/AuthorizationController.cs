@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProjectV2.Models;
 using PhysicalTherapyProjectV2.Models.DTO;

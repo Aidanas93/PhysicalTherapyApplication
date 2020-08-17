@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PhysicalTherapyProjectV2.Data;
-using PhysicalTherapyProjectV2.Models;
+using PhysicalTherapyProject.Domain.Models;
+using PhysicalTherapyProject.Persistance.Data;
 using PhysicalTherapyProjectV2.Services.Interfaces;
 using System;
 using System.Collections.Generic;

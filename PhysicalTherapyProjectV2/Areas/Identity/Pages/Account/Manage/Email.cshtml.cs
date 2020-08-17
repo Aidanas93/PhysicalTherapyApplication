@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using PhysicalTherapyProjectV2.Models;
+using PhysicalTherapyProject.Domain.Models;
 
 namespace PhysicalTherapyProjectV2.Areas.Identity.Pages.Account.Manage
 {

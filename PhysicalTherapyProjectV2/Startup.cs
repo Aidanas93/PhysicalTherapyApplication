@@ -17,6 +17,8 @@ using PhysicalTherapyProjectV2.Services.Interfaces;
 using PhysicalTherapyProjectV2.Services;
 using AutoMapper;
 using PhysicalTherapyProjectV2.Infrastructure;
+using PhysicalTherapyProject.Domain.Models;
+using PhysicalTherapyProject.Persistance.Data;
 
 namespace PhysicalTherapyProjectV2
 {

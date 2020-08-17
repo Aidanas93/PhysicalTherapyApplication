@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProjectV2.Models;
 namespace PhysicalTherapyProjectV2.Areas.Identity.Pages.Account.Manage
 {

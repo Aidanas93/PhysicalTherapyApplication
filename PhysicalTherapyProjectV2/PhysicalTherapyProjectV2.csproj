@@ -39,6 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PhysicalTherapyProject.Persistance\PhysicalTherapyProject.Persistance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="ImageParserLibrary">
       <HintPath>..\..\..\ImageParserLibrary.dll</HintPath>
     </Reference>

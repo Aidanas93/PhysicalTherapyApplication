@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Models;
 using PhysicalTherapyProjectV2.Models.ViewModel;
 using PhysicalTherapyProjectV2.Services.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {

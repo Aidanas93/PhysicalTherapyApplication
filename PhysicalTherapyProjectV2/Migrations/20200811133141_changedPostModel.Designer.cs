@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using PhysicalTherapyProject.Persistance.Data;
 using PhysicalTherapyProjectV2.Data;
 
 namespace PhysicalTherapyProjectV2.Migrations

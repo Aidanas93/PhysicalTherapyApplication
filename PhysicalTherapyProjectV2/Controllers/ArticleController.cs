@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Models;
 using PhysicalTherapyProjectV2.Services.Interfaces;
 
 namespace PhysicalTherapyProjectV2.Controllers

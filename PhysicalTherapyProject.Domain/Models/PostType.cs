@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace PhysicalTherapyProjectV2.Models
+namespace PhysicalTherapyProject.Domain.Models
 {
     public class PostType : BaseEntity
     {

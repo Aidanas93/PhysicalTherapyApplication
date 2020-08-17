@@ -1,4 +1,5 @@
-﻿using PhysicalTherapyProjectV2.Models;
+﻿using PhysicalTherapyProject.Domain.Models;
+using PhysicalTherapyProjectV2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

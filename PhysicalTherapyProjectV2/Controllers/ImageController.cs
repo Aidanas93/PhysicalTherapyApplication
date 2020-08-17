@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProjectV2.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {
@@ -21,13 +17,13 @@ namespace PhysicalTherapyProjectV2.Controllers
         {
             var image = await imageService.GetByIdAsync(id);
 
-            if(image == null)
+            if (image == null)
             {
                 return NotFound();
             }
 
             return File(image.Content, "image/png");
-     
+
         }
 
     }
