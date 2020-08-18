@@ -10,7 +10,7 @@
         <div class="main-item-3">
 
             <div class="index-post post">
-                <h2 class="header-underline" style="font-size:2em;">@Model.Title</h2>
+                <h2 class="header-underline" style="font-size:2em;">@Html.Raw(Model.Title)</h2>
                 <div>
                     <p>
                         <span class="post-person"><ion-icon name="person-circle-outline"></ion-icon>@Model.CreatedBy</span>
@@ -21,7 +21,7 @@
 
 
                 <div class="clear" style="margin-bottom:5px;"></div>
-                <p class="post-body">@Model.Body</p>
+                <p class="post-body">@Html.Raw(Model.Body)</p>
                 @if (Model.Images != null)
                 {
                     <div class="gallery" >

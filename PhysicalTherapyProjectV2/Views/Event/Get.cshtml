@@ -9,14 +9,14 @@
         <div class="empty-item-1"></div>
         <div class="main-item-3">
             <div class="index-post post">
-                <h2 class="header-underline" style="font-size:2em;">@Model.Title</h2>
+                <h2 class="header-underline" style="font-size:2em;">@Html.Raw(Model.Title)</h2>
                 <div>
                     <p>
                         <span class="post-person"><ion-icon name="person-circle-outline"></ion-icon>@Model.Title</span>
                         <span class="post-date"><ion-icon name="calendar-outline"></ion-icon>@Model.CreatedOn.ToString("yyyy-MM-dd HH:mm")</span>
                     </p>
                 </div>
-                <p class="card-text">@Model.Body</p>
+                <p class="card-text">@Html.Raw(Model.Body)</p>
 
 
                 @{

@@ -14,12 +14,11 @@
             <h2 class="header-underline" style="font-size:2em;">Naujausi Įrašai</h2>
             @foreach (var post in Model)
             {
-                if (post.isForAuthenticatedUser == false)
-                {
+                
                     var item = post.Body.Length <= 500 ? post.Body : post.Body.Substring(0, 500) + "...";
 
                     <div class="index-post post" onmouseover="highlightPost(this)" onmouseout="removeHighlight(this)">
-                        <h2>@post.Title</h2>
+                        <h2>@Html.Raw(post.Title)</h2>
                         <div>
                             <p>
                                 <span class="post-person"><ion-icon name="person-circle-outline"></ion-icon>@post.CreatedBy</span>
@@ -27,10 +26,10 @@
                             </p>
                         </div>
                         <div class="clear" style="margin-bottom:5px;"></div>
-                        <p class="post-body">@item</p>
+                        <p class="post-body">@Html.Raw(post.Body)</p>
                         <a class="btn btn-ghost post-btn" asp-action="Get" asp-controller="Article" asp-route-id="@post.Id">Daugiau</a>
                     </div>
-                }
+                
             }
 
 

@@ -4,6 +4,7 @@ using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using PhysicalTherapyProjectV2.Infrastructure;
 using PhysicalTherapyProjectV2.Models.ViewModel;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PhysicalTherapyProjectV2.Controllers
@@ -184,10 +185,12 @@ namespace PhysicalTherapyProjectV2.Controllers
                     ImageParser imageParser = new ImageParser();
 
                     var imageList = imageParser.ConvertToBytes(viewmodel.Files);
+                    List<Image> images = new List<Image>();
                     foreach (var image in imageList)
-                    {
-                        viewmodel.Post.Images.Add(new Image { Content = image });
+                    {                        
+                        images.Add(new Image { Content = image });                        
                     }
+                    viewmodel.Post.Images = images;
                 }
                 catch (Exception ex)
                 {

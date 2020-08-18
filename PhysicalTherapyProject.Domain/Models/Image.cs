@@ -6,6 +6,7 @@ namespace PhysicalTherapyProject.Domain.Models
     {
         [Required]
         public byte[] Content { get; set; }
-
+        public int? PostId { get; set; }
+        public Post Post { get; set; }
     }
 }

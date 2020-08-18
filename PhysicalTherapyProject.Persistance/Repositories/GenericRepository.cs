@@ -19,31 +19,31 @@ namespace PhysicalTherapyProject.Persistance.Repositories
             entities = _applicationDbContext.Set<TEntity>();
         }
 
-        public async Task<TEntity> GetByIdAsync(int id) =>
+        public virtual async Task<TEntity> GetByIdAsync(int id) =>
             await Query().Where(p => p.Id == id)
             .FirstOrDefaultAsync();
 
-        public async Task<ICollection<TEntity>> GetAllAsync() =>
+        public virtual async Task<ICollection<TEntity>> GetAllAsync() =>
             await Query().ToListAsync();
 
-        public async Task<TEntity> InsertAsync(TEntity entry)
+        public virtual async Task<TEntity> InsertAsync(TEntity entry)
         {
             entities.Add(entry);
             await _applicationDbContext.SaveChangesAsync();
             return entry;
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entry)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entry)
         {
             TEntity dbEntry = await GetByIdAsync(entry.Id);
             if (dbEntry != null)
-            {
+            {                
                 _applicationDbContext.Entry(dbEntry).CurrentValues.SetValues(entry);
                 await _applicationDbContext.SaveChangesAsync();
             }
             return entry;
         }
-        public async Task<TEntity> DeleteAsync(int id)
+        public virtual async Task<TEntity> DeleteAsync(int id)
         {
             TEntity dbEntry = await GetByIdAsync(id);
             if (dbEntry != null)
@@ -61,6 +61,7 @@ namespace PhysicalTherapyProject.Persistance.Repositories
             {
                 query = query.Include(property.Name);
             }
+            query = query.OrderByDescending(x => x.CreatedOn);
             return query;
         }
     }

@@ -1,4 +1,6 @@
 ﻿@model PostViewModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Pridėti informaciją apie valdybos narį";
     Layout = "_AdminLayout";
@@ -11,6 +13,7 @@
         <form asp-action="CreateTeamMember" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Post.Id" />
             <input type="hidden" asp-for="Post.PostTypeId" />
+            <input type="hidden" asp-for="Post.CreatedBy" value="@UserManager.GetUserAsync(User).Result.Email" />
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group">
@@ -24,9 +27,10 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Post.Body">Informacija:</label>
-                <input type="text" class="form-control" asp-for="Post.Body" />
+                <label asp-for="Post.Body">Aprašymas:</label>
+                <textarea asp-for="Post.Body" class="form-control"></textarea>
             </div>
+
 
             <div>
                 <button type="submit" class="btn btn-success">Sukurti</button>
@@ -35,4 +39,20 @@
     </div>
 </div>
 
+@section Stylesheets{
+    <script src="https://cdn.tiny.cloud/1/ol12dz8pmm89a37ixbobmdt86ih6wrgzd4pqrjqzwil3ngd3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+}
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+            toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+        });
+    </script>
+}
 

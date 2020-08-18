@@ -1,4 +1,6 @@
 ﻿@model PostViewModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Sukurti Renginį";
     Layout = "_AdminLayout";
@@ -11,6 +13,7 @@
         <form asp-action="CreateEvent" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Post.Id" />
             <input type="hidden" asp-for="Post.PostTypeId" />
+            <input type="hidden" asp-for="Post.CreatedBy" value="@UserManager.GetUserAsync(User).Result.Name" />
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group">
@@ -30,7 +33,7 @@
 
             <div class="form-group">
                 <label asp-for="Post.Body">Aprašymas:</label>
-                <input type="text" class="form-control" asp-for="Post.Body" />
+                <textarea asp-for="Post.Body" class="form-control"></textarea>
             </div>
 
             <div>
@@ -39,6 +42,24 @@
         </form>
     </div>
 </div>
+
+
+@section Stylesheets{
+    <script src="https://cdn.tiny.cloud/1/ol12dz8pmm89a37ixbobmdt86ih6wrgzd4pqrjqzwil3ngd3/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+}
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+            toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+        });
+    </script>
+}
 
 
 

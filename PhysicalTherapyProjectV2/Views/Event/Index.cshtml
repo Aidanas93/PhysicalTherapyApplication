@@ -27,9 +27,9 @@
                             }
 
                             <div class="card-body">
-                                <h5 class="card-title">@post.Title</h5>
+                                <h5 class="card-title">@Html.Raw(post.Title)</h5>
                                 <small class="card-subtitle">@post.Date</small>
-                                <p class="card-text">@item</p>
+                                <p class="card-text">@Html.Raw(post.Body)</p>
                                 <a asp-action="Get" asp-route-id="@post.Id" class="btn btn-ghost">Daugiau</a>
                             </div>
                         </div>

@@ -20,7 +20,30 @@ namespace PhysicalTherapyProject.Persistance.Repositories
             .Include(post => post.PostType)
             .Include(post => post.PostUser)
             .Include(post => post.Images)
-            .Where(type => type.PostType.Id == id)
+            .Where(post => post.PostType.Id == id)
+            .OrderByDescending(post => post.CreatedOn)
             .ToListAsync();
+
+        public override async Task<Post> UpdateAsync(Post entry)
+        {
+            Post dbEntry = await GetByIdAsync(entry.Id);
+            if (dbEntry != null)
+            {   
+                if(entry.Images != null)
+                {
+                    var oldImages = _applicationDbContext.Images.Where(img => img.PostId == entry.Id).ToList();
+                    _applicationDbContext.Images.RemoveRange(oldImages);
+                    foreach(var image in entry.Images)
+                    {
+                        image.PostId = entry.Id;
+                        _applicationDbContext.Images.Add(image);
+                    }
+                }
+
+                _applicationDbContext.Entry(dbEntry).CurrentValues.SetValues(entry);
+                await _applicationDbContext.SaveChangesAsync();
+            }
+            return entry;
+        }
     }
 }

@@ -142,7 +142,7 @@ namespace PhysicalTherapyProject.Persistance.Infrastructure.Extensions
                 {
                     Id = 1,
                     Name = "Administrator"
-                }
+                }             
             );
         }
     }
