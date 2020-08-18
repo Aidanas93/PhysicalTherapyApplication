@@ -9,6 +9,7 @@ namespace PhysicalTherapyProjectV2.Infrastructure
     {
         Article = 1,
         Event = 2,
-        Advertisment = 3
+        Advertisment = 3,
+        TeamMember = 4,
     }
 }

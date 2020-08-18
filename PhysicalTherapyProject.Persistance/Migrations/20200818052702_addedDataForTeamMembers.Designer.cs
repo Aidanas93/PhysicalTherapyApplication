@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhysicalTherapyProject.Persistance.Data;
 
 namespace PhysicalTherapyProject.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200818052702_addedDataForTeamMembers")]
+    partial class addedDataForTeamMembers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,14 +149,6 @@ namespace PhysicalTherapyProject.Persistance.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ConcurrencyStamp = "922c23aa-e6eb-4f76-b802-4cafdbaba03e",
-                            Name = "Administrator"
-                        });
                 });
 
             modelBuilder.Entity("PhysicalTherapyProject.Domain.Models.ApplicationUser", b =>
@@ -318,23 +312,23 @@ namespace PhysicalTherapyProject.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(8449),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(7094),
                             Name = "Studentas",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(8463)
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(7110)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(8753),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(7426),
                             Name = "Dėstytojas",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(8764)
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(7436)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(8775),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(7448),
                             Name = "Kineziterapeutas",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(8778)
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(7452)
                         });
                 });
 
@@ -388,110 +382,77 @@ namespace PhysicalTherapyProject.Persistance.Migrations
                         {
                             Id = 1,
                             Body = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(6081),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(4614),
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostTypeId = 1,
                             Title = "What is Lorem Ipsum?",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(6099),
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(4633),
                             isForAuthenticatedUser = false
                         },
                         new
                         {
                             Id = 2,
                             Body = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7799),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6342),
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostTypeId = 1,
                             Title = "1914 translation by H. Rackham",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7816),
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6358),
                             isForAuthenticatedUser = false
                         },
                         new
                         {
                             Id = 3,
                             Body = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7866),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6405),
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostTypeId = 1,
                             Title = "The standard Lorem Ipsum passage, used since the 1500s",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7870),
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6409),
                             isForAuthenticatedUser = false
                         },
                         new
                         {
                             Id = 4,
                             Body = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7875),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6414),
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostTypeId = 1,
                             Title = "Where does it come from?",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7878),
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6418),
                             isForAuthenticatedUser = false
                         },
                         new
                         {
                             Id = 5,
                             Body = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7882),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6422),
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostTypeId = 1,
                             Title = "Where can I get some?",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7886),
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6426),
                             isForAuthenticatedUser = false
                         },
                         new
                         {
                             Id = 6,
                             Body = "Prezidentė: INESA RIMDEIKIENĖ 861112265 inesa.rimdeikiene@kaunoklinikos.lt Pareigos: draugijos valdybos ir narių atstovavimas, bendravimas su valstybinėmis institucijomis",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7890),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6430),
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostTypeId = 4,
                             Title = "Where can I get some?",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7893),
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6433),
                             isForAuthenticatedUser = false
                         },
                         new
                         {
                             Id = 7,
                             Body = "RAIMUNDAS VENSKAITIS 862237888 raimundas.venskaitis@gmail.com Pareigos:  draugijos internetinio puslapio ir Facebook paskyros valdymas ir priežiūra",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7897),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6438),
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostTypeId = 4,
                             Title = "Where can I get some?",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7900),
-                            isForAuthenticatedUser = false
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Body = "DOVILĖ VALATKIENĖ –Klaipėdos <b>kr.pirmininkė<b> 861149101 dvalatkiene@yahoo.com klaipedosktd@gmail.com Pareigos: Klaipėdos krašto kineziterapeutų atstovavimas",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7904),
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostTypeId = 4,
-                            Title = "Where can I get some?",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7907),
-                            isForAuthenticatedUser = false
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Body = "BRIGITA ZACHOVAJEVIENĖ – Kauno kr. pirmininkė 8 698 75901 brigitaz@medi.lt Pareigos: sekretorė",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7912),
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostTypeId = 4,
-                            Title = "Where can I get some?",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7915),
-                            isForAuthenticatedUser = false
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Body = "IEVA EGLĖ JAMONTAITĖ  Vilniaus kr.pirmininkė 8 682 45413 ieva.jamontaite@gmail.com Pareigos: LKTD narių narystės tvarkos priežiūra",
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7919),
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostTypeId = 4,
-                            Title = "Where can I get some?",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 691, DateTimeKind.Local).AddTicks(7922),
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 96, DateTimeKind.Local).AddTicks(6441),
                             isForAuthenticatedUser = false
                         });
                 });
@@ -526,30 +487,30 @@ namespace PhysicalTherapyProject.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 687, DateTimeKind.Local).AddTicks(9964),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 92, DateTimeKind.Local).AddTicks(7679),
                             Name = "Article",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 690, DateTimeKind.Local).AddTicks(4978)
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 95, DateTimeKind.Local).AddTicks(3369)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 690, DateTimeKind.Local).AddTicks(5870),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 95, DateTimeKind.Local).AddTicks(4279),
                             Name = "Event",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 690, DateTimeKind.Local).AddTicks(5891)
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 95, DateTimeKind.Local).AddTicks(4299)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 690, DateTimeKind.Local).AddTicks(5915),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 95, DateTimeKind.Local).AddTicks(4327),
                             Name = "Advertisment",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 690, DateTimeKind.Local).AddTicks(5919)
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 95, DateTimeKind.Local).AddTicks(4331)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 690, DateTimeKind.Local).AddTicks(5922),
+                            CreatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 95, DateTimeKind.Local).AddTicks(4334),
                             Name = "TeamMember",
-                            UpdatedOn = new DateTime(2020, 8, 18, 8, 38, 22, 690, DateTimeKind.Local).AddTicks(5925)
+                            UpdatedOn = new DateTime(2020, 8, 18, 8, 27, 2, 95, DateTimeKind.Local).AddTicks(4338)
                         });
                 });
 

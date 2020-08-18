@@ -11,14 +11,14 @@ namespace PhysicalTherapyProjectV2.Controllers
 
         public HomeController(IPostRepository postRepository)
         {
-            this._postRepository = postRepository;
+            _postRepository = postRepository;
         }
 
         public async Task<IActionResult> Index() => View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Article));
 
         public IActionResult Privacy() => View();
 
-        public IActionResult AboutUs() => View();
+        public async Task<IActionResult> AboutUs() => View(await _postRepository.GetAllByTypeAsync((int)PostTypes.TeamMember));
 
         public IActionResult Partnership() => View();
 
