@@ -10,9 +10,10 @@
     <div style="margin:10px">
         <h1 class="mt-4">Parašyti Naujieną</h1>
 
-        <form asp-action="CreateTeamMember" method="post" enctype="multipart/form-data">
+        <form asp-action="CreatePost" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Post.Id" />
             <input type="hidden" asp-for="Post.PostTypeId" />
+            <input type="hidden" asp-for="CurrentView" value="CreateTeamMember" />
             <input type="hidden" asp-for="Post.CreatedBy" value="@UserManager.GetUserAsync(User).Result.Email" />
             <div asp-validation-summary="All" class="text-danger"></div>
 

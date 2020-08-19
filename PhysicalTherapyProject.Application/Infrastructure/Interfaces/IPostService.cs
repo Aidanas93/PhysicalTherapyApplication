@@ -1,9 +1,11 @@
 ﻿using PhysicalTherapyProject.Application.Models.ViewModels;
+using System.Threading.Tasks;
 
 namespace PhysicalTherapyProject.Application.Infrastructure.Interfaces
 {
     public interface IPostService
     {
-        void CreatePost(PostViewModel viewmodel);
+        string ServiceMessage { get; }
+        Task CreatePostAsync(PostViewModel viewmodel);
     }
 }

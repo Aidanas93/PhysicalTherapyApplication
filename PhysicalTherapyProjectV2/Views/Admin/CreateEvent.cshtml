@@ -10,9 +10,10 @@
     <div style="margin:10px">
         <h1 class="mt-4">Sukurti Renginį</h1>
 
-        <form asp-action="CreateEvent" method="post" enctype="multipart/form-data">
+        <form asp-action="CreatePost" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Post.Id" />
             <input type="hidden" asp-for="Post.PostTypeId" />
+            <input type="hidden" asp-for="CurrentView" value="CreateEvent" />
             <input type="hidden" asp-for="Post.CreatedBy" value="@UserManager.GetUserAsync(User).Result.Name" />
             <div asp-validation-summary="All" class="text-danger"></div>
 

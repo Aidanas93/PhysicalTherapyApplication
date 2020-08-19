@@ -3,31 +3,31 @@
     ViewData["Title"] = "AboutUs";
 }
 
-    <div class="about-us">
-        <h1 class="header-underline">Apie Mus</h1>
+<div class="about-us">
+    <h1 class="header-underline">Apie Mus</h1>
 
-        <p>Elektroninis paštas:  lietuvosktd@gmail.com</p>
-        <p>Adresas: Eivenių g. 2, Kaunas.</p>
-        <h2>Mūsų komanda: </h2>
-        <div class="row">
-            @foreach (var member in Model)
-            {
-                <div class="column-about-us">
-                    <div class="card-about-us">
-                        <h2>@member.Title</h2>
-                        @if (member.Images.Count > 0)
-                        {
-                            <a target="_blank" asp-action="Render" asp-controller="Image" asp-route-id="@member.Images.First().Id ">
-                                <img src="@Url.Action("Render", "Image", new { id = member.Images.First().Id })"
-                                     alt="@member.Images.First().CreatedOn" width="300" height="250">
-                            </a>
-                        }
-                        <div class="container-about-us">
-                            <p>@member.Body</p>
-                            <p><button class="button-about-us">Contact</button></p>
-                        </div>
+    <p>Elektroninis paštas:  lietuvosktd@gmail.com</p>
+    <p>Adresas: Eivenių g. 2, Kaunas.</p>
+    <h2>Mūsų komanda: </h2>
+    <div class="row">
+        @foreach (var member in Model)
+        {
+            <div class="column-about-us">
+                <div class="card-about-us">
+                    <h2>@member.Title</h2>
+                    @if (member.Images.Count > 0)
+                    {
+                        <a target="_blank" asp-action="Render" asp-controller="Image" asp-route-id="@member.Images.First().Id ">
+                            <img src="@Url.Action("Render", "Image", new { id = member.Images.First().Id })"
+                                 alt="@member.Images.First().CreatedOn" width="300" height="250">
+                        </a>
+                    }
+                    <div class="container-about-us">
+                        <p>@Html.Raw(member.Body)</p>
+                        <p><button class="button-about-us">Contact</button></p>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+</div>

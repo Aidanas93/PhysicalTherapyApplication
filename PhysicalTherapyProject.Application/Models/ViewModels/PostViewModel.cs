@@ -11,5 +11,6 @@ namespace PhysicalTherapyProject.Application.Models.ViewModels
         public int[] TagsId { get; set; }
         public IList<SelectListItem> Tags { get; set; }
         public IFormFileCollection Files { get; set; }
+        public string CurrentView { get; set; }
     }
 }

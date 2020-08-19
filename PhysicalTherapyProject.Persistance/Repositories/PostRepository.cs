@@ -28,22 +28,39 @@ namespace PhysicalTherapyProject.Persistance.Repositories
         {
             Post dbEntry = await GetByIdAsync(entry.Id);
             if (dbEntry != null)
-            {   
-                if(entry.Images != null)
-                {
-                    var oldImages = _applicationDbContext.Images.Where(img => img.PostId == entry.Id).ToList();
-                    _applicationDbContext.Images.RemoveRange(oldImages);
-                    foreach(var image in entry.Images)
-                    {
-                        image.PostId = entry.Id;
-                        _applicationDbContext.Images.Add(image);
-                    }
-                }
-
+            {
+                UpdatePostImages(entry);
+                UpdatePostTags(entry);
                 _applicationDbContext.Entry(dbEntry).CurrentValues.SetValues(entry);
                 await _applicationDbContext.SaveChangesAsync();
             }
             return entry;
+        }
+
+        private void UpdatePostImages(Post entry)
+        {
+            if (entry.Images.Count > 0)
+            {
+                var oldImages = _applicationDbContext.Images.Where(img => img.PostId == entry.Id).ToList();
+                _applicationDbContext.Images.RemoveRange(oldImages);
+                foreach (var image in entry.Images)
+                {
+                    image.PostId = entry.Id;
+                    _applicationDbContext.Images.Add(image);
+                }
+            }
+        }
+        private void UpdatePostTags(Post entry)
+        {
+            if (entry.PostTags.Count > 0)
+            {
+                var oldPostTags = _applicationDbContext.PostTags.Where(pt => pt.PostId == entry.Id).ToList();
+                _applicationDbContext.PostTags.RemoveRange(oldPostTags);
+                foreach (var postTag in entry.PostTags)
+                {
+                    _applicationDbContext.PostTags.Add(postTag);
+                }
+            }
         }
     }
 }

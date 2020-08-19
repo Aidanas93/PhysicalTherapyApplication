@@ -15,11 +15,17 @@
     <h4 style="text-align:center;">Keisti Paskyros Nustatymus</h4>
     <hr />
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-12">
             <partial name="_ManageNav" />
         </div>
-        <div class="col-md-9" style="margin:0,10px,0,10px">
-            @RenderBody()
+        <div style="margin:0,15px,0,15px;display:flex;
+                flex-direction:row; justify-content:center">
+            <div style="flex:1"></div>
+            <div style="flex:1; flex-direction:row; justify-content:center">
+                @RenderBody()
+            </div>
+            <div style="flex:1"></div>
+
         </div>
     </div>
 </div>

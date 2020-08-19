@@ -34,49 +34,16 @@ namespace PhysicalTherapyProjectV2.Controllers
             return View(await _userRepository.GetAllAsync());
         }
 
+        #region EVENT
         [HttpGet]
         public async Task<IActionResult> ListEvent()
-            => View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Event));
+           => View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Event));
 
         [HttpGet]
         public IActionResult CreateEvent() => View(new PostViewModel
         {
             Post = new Post() { PostTypeId = 2 }
         });
-
-        [HttpPost]
-        public async Task<IActionResult> CreateEvent(PostViewModel viewmodel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(ModelState);
-            }
-
-            if (viewmodel.Files != null)
-            {
-                ImageParser imageParser = new ImageParser();
-                var imageList = imageParser.ConvertToBytes(viewmodel.Files);
-
-                foreach (var image in imageList)
-                {
-                    viewmodel.Post.Images.Add(new Image { Content = image });
-                }
-            }
-
-            if (viewmodel.Post.Id == 0)
-            {
-
-                var created_ent = await _postRepository.InsertAsync(viewmodel.Post);
-                TempData["message"] = $"Renginys: '{created_ent}' buvo sukurtas!";
-            }
-            else
-            {
-                var updated_ent = await _postRepository.UpdateAsync(viewmodel.Post);
-                TempData["message"] = $"Renginys: '{updated_ent}' buvo redaguotas!";
-            }
-
-            return RedirectToAction(nameof(ListEvent));
-        }
 
         [HttpGet]
         public async Task<IActionResult> EditEvent(int id) =>
@@ -94,58 +61,13 @@ namespace PhysicalTherapyProjectV2.Controllers
             TempData["message"] = $"Renginys '{article.Title}' buvo ištrintas!";
             return RedirectToAction(nameof(ListEvent));
         }
+        #endregion
 
-
-
-
-
+        #region TEAMMEMBER
         public IActionResult CreateTeamMember() => View(new PostViewModel
         {
             Post = new Post() { PostTypeId = (int)PostTypes.TeamMember }
         });
-
-        [HttpPost]
-        public async Task<IActionResult> CreateTeamMember(PostViewModel viewmodel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(ModelState);
-            }
-
-            if (viewmodel.Files != null)
-            {
-                try
-                {
-                    ImageParser imageParser = new ImageParser();
-
-                    var imageList = imageParser.ConvertToBytes(viewmodel.Files);
-                    foreach (var image in imageList)
-                    {
-                        viewmodel.Post.Images.Add(new Image { Content = image });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("File Error", ex.Message);
-                    return View(ModelState);
-                }
-
-            }
-
-            if (viewmodel.Post.Id == 0)
-            {
-
-                var created_ent = await _postRepository.InsertAsync(viewmodel.Post);
-                TempData["message"] = $"Informacija apie komandos narį: '{created_ent}' buvo sukurta!";
-            }
-            else
-            {
-                var updated_ent = await _postRepository.UpdateAsync(viewmodel.Post);
-                TempData["message"] = $"Informacija apie komandos narį: '{updated_ent}' buvo redaguota!";
-            }
-
-            return RedirectToAction(nameof(ListTeamMembers));
-        }
 
         public async Task<IActionResult> ListTeamMembers() =>
             View(await _postRepository.GetAllByTypeAsync((int)PostTypes.TeamMember));
@@ -165,11 +87,9 @@ namespace PhysicalTherapyProjectV2.Controllers
             TempData["message"] = $"Informacija apie komandos narį '{article.Title}' buvo ištrinta!";
             return RedirectToAction(nameof(ListTeamMembers));
         }
+        #endregion
 
-
-
-
-
+        #region ARTICLE
         public async Task<IActionResult> ListArticle() =>
             View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Article));
 
@@ -183,50 +103,16 @@ namespace PhysicalTherapyProjectV2.Controllers
             });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateArticle(PostViewModel viewmodel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(ModelState);
-            }
-
-            if (viewmodel.Files != null)
-            {
-                try
-                {
-                    _postService.CreatePost(viewmodel);
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("File Error", ex.Message);
-                    return View(ModelState);
-                }
-
-            }
-
-            if (viewmodel.Post.Id == 0)
-            {
-
-                var created_ent = await _postRepository.InsertAsync(viewmodel.Post);
-                TempData["message"] = $"Straipsnis: '{created_ent}' buvo sukurtas!";
-            }
-            else
-            {
-                var updated_ent = await _postRepository.UpdateAsync(viewmodel.Post);
-                TempData["message"] = $"Straipsnis: '{updated_ent}' buvo redaguotas!";
-            }
-
-            return RedirectToAction(nameof(ListArticle));
-        }
-
         [HttpGet]
-        public async Task<IActionResult> EditArticle(int id) =>
-        View(nameof(CreateArticle), new PostViewModel()
+        public async Task<IActionResult> EditArticle(int id)
         {
-            Post = await _postRepository.GetByIdAsync(id)
-        });
-
+            var tags = await _tagRepository.GetAllAsync();
+            return View(nameof(CreateArticle), new PostViewModel()
+            {
+                Post = await _postRepository.GetByIdAsync(id),
+                Tags = tags.ConvertToSelectListItems()
+            });
+        }
 
         [HttpPost]
         public async Task<IActionResult> DeleteArticle(int id)
@@ -236,7 +122,9 @@ namespace PhysicalTherapyProjectV2.Controllers
             TempData["message"] = $"Straipsnis '{article.Title}' buvo ištrintas!";
             return RedirectToAction(nameof(ListArticle));
         }
+        #endregion
 
+        #region USER
         [HttpPost]
         public async Task<IActionResult> ConfirmUser(int userId)
         {
@@ -255,6 +143,28 @@ namespace PhysicalTherapyProjectV2.Controllers
             TempData["message"] = $"{user.Name} {user.Surname} buvo ištrintas!";
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
+        [HttpPost]
+        public async Task<IActionResult> CreatePost(PostViewModel viewmodel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewmodel.CurrentView, viewmodel);
+            }
+
+            try
+            {
+                await _postService.CreatePostAsync(viewmodel);
+                TempData["message"] = _postService.ServiceMessage;
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("File Error", ex.Message);
+                return View(viewmodel.CurrentView, viewmodel);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
