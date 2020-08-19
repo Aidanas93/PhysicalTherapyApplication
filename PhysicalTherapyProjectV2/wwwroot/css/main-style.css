@@ -16,6 +16,13 @@ html {
     font-size: 20px;
 }
 
+.html {
+    font-family: 'Montserrat', sans-serif;
+    color: #555;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    font-size: 20px;
+}
 
 /* *************************************** */
 /* REUSABLE COMPONENTS */
@@ -284,6 +291,25 @@ h2 {
     border: 1px solid #148f77;
     color: #FFF;
 }
+
+.button-full {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 200px;
+    text-decoration: none;
+    font-weight: 300;
+    background-color: #1abc9c;
+    border: 1px solid #1abc9c;
+    color: #FFF;
+    transition: background-color 0.3s, border 0.3s, color 0.3s;
+}
+
+    .button-full:hover {
+        background-color: #148f77;
+        border: 1px solid #148f77;
+        color: #FFF;
+    }
+
 /*#endregion Buttons*/
 /* *************************************** */
 /* IMAGES */
