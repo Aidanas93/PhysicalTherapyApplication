@@ -142,7 +142,30 @@ namespace PhysicalTherapyProject.Persistance.Infrastructure.Extensions
                 {
                     Id = 1,
                     Name = "Administrator"
-                }             
+                }
+            );
+
+            modelBuilder.Entity<Tag>().HasData(
+                new Tag()
+                {
+                    Id = 1,
+                    TagValue = "Naujienos"
+                },
+                new Tag()
+                {
+                    Id = 2,
+                    TagValue = "Renginys"
+                },
+                new Tag()
+                {
+                    Id = 3,
+                    TagValue = "Mokymai"
+                },
+                new Tag()
+                {
+                    Id = 4,
+                    TagValue = "Mokslas"
+                }
             );
         }
     }

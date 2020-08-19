@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProject.Application.Infrastructure;
+using PhysicalTherapyProject.Application.Models.DTO;
 using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
-using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Models;
-using PhysicalTherapyProjectV2.Models.DTO;
 using System;
 using System.Threading.Tasks;
 

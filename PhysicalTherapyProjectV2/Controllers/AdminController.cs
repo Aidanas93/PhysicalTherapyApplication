@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProject.Application.Infrastructure;
+using PhysicalTherapyProject.Application.Infrastructure.Enums;
+using PhysicalTherapyProject.Application.Infrastructure.Extensions;
+using PhysicalTherapyProject.Application.Infrastructure.Interfaces;
+using PhysicalTherapyProject.Application.Models.ViewModels;
 using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
-using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,11 +17,16 @@ namespace PhysicalTherapyProjectV2.Controllers
     {
         private readonly IPostRepository _postRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IGenericRepository<Tag> _tagRepository;
+        private readonly IPostService _postService;
 
-        public AdminController(IPostRepository postRepository, IUserRepository userRepository)
+        public AdminController(IPostRepository postRepository, IUserRepository userRepository,
+            IGenericRepository<Tag> tagRepository, IPostService postService)
         {
             _postRepository = postRepository;
             _userRepository = userRepository;
+            _tagRepository = tagRepository;
+            _postService = postService;
         }
 
         public async Task<IActionResult> Index()
@@ -163,12 +171,17 @@ namespace PhysicalTherapyProjectV2.Controllers
 
 
         public async Task<IActionResult> ListArticle() =>
-            View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Article));        
+            View(await _postRepository.GetAllByTypeAsync((int)PostTypes.Article));
 
-        public IActionResult CreateArticle() => View(new PostViewModel
+        public async Task<IActionResult> CreateArticle()
         {
-            Post = new Post() { PostTypeId = (int)PostTypes.Article }
-        });
+            var tags = await _tagRepository.GetAllAsync();
+            return View(new PostViewModel
+            {
+                Post = new Post() { PostTypeId = (int)PostTypes.Article },
+                Tags = tags.ConvertToSelectListItems()
+            });
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateArticle(PostViewModel viewmodel)
@@ -182,15 +195,7 @@ namespace PhysicalTherapyProjectV2.Controllers
             {
                 try
                 {
-                    ImageParser imageParser = new ImageParser();
-
-                    var imageList = imageParser.ConvertToBytes(viewmodel.Files);
-                    List<Image> images = new List<Image>();
-                    foreach (var image in imageList)
-                    {                        
-                        images.Add(new Image { Content = image });                        
-                    }
-                    viewmodel.Post.Images = images;
+                    _postService.CreatePost(viewmodel);
                 }
                 catch (Exception ex)
                 {

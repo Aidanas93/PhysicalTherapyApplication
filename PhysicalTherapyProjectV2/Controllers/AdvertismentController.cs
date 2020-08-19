@@ -1,6 +1,5 @@
-﻿using PhysicalTherapyProject.Domain.Models;
+﻿using PhysicalTherapyProject.Application.Infrastructure.Enums;
 using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
-using PhysicalTherapyProjectV2.Infrastructure;
 
 namespace PhysicalTherapyProjectV2.Controllers
 {

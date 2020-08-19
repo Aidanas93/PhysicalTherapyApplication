@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProject.Application.Infrastructure;
+using PhysicalTherapyProject.Application.Models.ViewModels;
 using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
-using PhysicalTherapyProjectV2.Infrastructure;
-using PhysicalTherapyProjectV2.Models.ViewModel;
 using System.Linq;
 using System.Threading.Tasks;
 

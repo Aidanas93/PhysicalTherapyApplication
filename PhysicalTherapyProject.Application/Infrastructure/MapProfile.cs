@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
+using PhysicalTherapyProject.Application.Models.DTO;
 using PhysicalTherapyProject.Domain.Models;
-using PhysicalTherapyProjectV2.Models;
-using PhysicalTherapyProjectV2.Models.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PhysicalTherapyProjectV2.Infrastructure
+namespace PhysicalTherapyProject.Application.Infrastructure
 {
     public class MapProfile : Profile
     {

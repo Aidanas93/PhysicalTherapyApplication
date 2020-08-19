@@ -32,6 +32,11 @@
                 <textarea asp-for="Post.Body" class="form-control"></textarea>
             </div>
 
+            <div class="form-group">
+                <select asp-for="TagsId" asp-items="Model.Tags" class="custom-select" multiple>
+                </select>
+            </div>
+
             <div class="form-group d-inline">
                 <label asp-for="Post.isForAuthenticatedUser">Turinys Registruotiems Vartotojams?</label>
                 <input type="checkbox" asp-for="Post.isForAuthenticatedUser" />

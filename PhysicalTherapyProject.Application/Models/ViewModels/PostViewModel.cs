@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PhysicalTherapyProject.Domain.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PhysicalTherapyProjectV2.Models.ViewModel
+namespace PhysicalTherapyProject.Application.Models.ViewModels
 {
     public class PostViewModel
     {
         public Post Post { get; set; }
+        public int[] TagsId { get; set; }
+        public IList<SelectListItem> Tags { get; set; }
         public IFormFileCollection Files { get; set; }
-
     }
 }

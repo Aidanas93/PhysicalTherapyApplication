@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace PhysicalTherapyProjectV2.Infrastructure
+namespace PhysicalTherapyProject.Application.Infrastructure.Enums
 {
-    enum PostTypes
+    public enum PostTypes
     {
         Article = 1,
         Event = 2,

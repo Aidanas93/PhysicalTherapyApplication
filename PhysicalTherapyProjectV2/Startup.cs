@@ -6,11 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PhysicalTherapyProject.Application.Infrastructure;
+using PhysicalTherapyProject.Application.Infrastructure.Interfaces;
+using PhysicalTherapyProject.Application.Services;
 using PhysicalTherapyProject.Domain.Models;
 using PhysicalTherapyProject.Persistance.Data;
 using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
 using PhysicalTherapyProject.Persistance.Repositories;
-using PhysicalTherapyProjectV2.Infrastructure;
 
 namespace PhysicalTherapyProjectV2
 {
@@ -28,7 +30,9 @@ namespace PhysicalTherapyProjectV2
         {
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IGenericRepository<Image>, GenericRepository<Image>>();
+            services.AddScoped<IGenericRepository<Tag>, GenericRepository<Tag>>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPostService, PostService>();
 
             services.AddAutoMapper(typeof(MapProfile));
             services.AddDbContext<ApplicationDbContext>(options =>

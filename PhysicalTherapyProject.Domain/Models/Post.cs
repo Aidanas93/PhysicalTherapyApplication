@@ -18,6 +18,7 @@ namespace PhysicalTherapyProject.Domain.Models
         public ApplicationUser PostUser { get; set; }
         public int? PostTypeId { get; set; }
         public PostType PostType { get; set; }
+        public ICollection<PostTag> PostTags { get; set; }
         public override string ToString() => Title;
     }
 }

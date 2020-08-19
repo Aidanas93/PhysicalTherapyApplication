@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyProject.Application.Infrastructure.Enums;
 using PhysicalTherapyProject.Persistance.Infrastructure.Interfaces;
-using PhysicalTherapyProjectV2.Infrastructure;
 using System.Threading.Tasks;
 
 namespace PhysicalTherapyProjectV2.Controllers
