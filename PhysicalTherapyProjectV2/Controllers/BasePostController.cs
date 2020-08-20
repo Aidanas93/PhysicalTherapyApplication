@@ -54,7 +54,7 @@ namespace PhysicalTherapyProjectV2.Controllers
             if (viewModel.Post.Id == 0)
             {
 
-                var created_ent = await _postRepository.InsertAsync(viewModel.Post);
+                var created_ent = await _postRepository.AddAsync(viewModel.Post);
                 TempData["message"] = $"{created_ent} buvo sukurtas!";
             }
             else

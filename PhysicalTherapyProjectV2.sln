@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhysicalTherapyProject.Doma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhysicalTherapyProject.Persistance", "PhysicalTherapyProject.Persistance\PhysicalTherapyProject.Persistance.csproj", "{20805794-6AE1-40EC-984B-6EE1814F4046}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicalTherapyProject.Application", "PhysicalTherapyProject.Application\PhysicalTherapyProject.Application.csproj", "{3A3492E8-2FA9-4D9B-86D9-41C676722DD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhysicalTherapyProject.Application", "PhysicalTherapyProject.Application\PhysicalTherapyProject.Application.csproj", "{3A3492E8-2FA9-4D9B-86D9-41C676722DD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicalTherapyProjectV2.Tests", "PhysicalTherapyProjectV2.Tests\PhysicalTherapyProjectV2.Tests.csproj", "{2E484C1A-B2A3-42DD-A1D6-A6CFDCB39748}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3A3492E8-2FA9-4D9B-86D9-41C676722DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A3492E8-2FA9-4D9B-86D9-41C676722DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A3492E8-2FA9-4D9B-86D9-41C676722DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E484C1A-B2A3-42DD-A1D6-A6CFDCB39748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E484C1A-B2A3-42DD-A1D6-A6CFDCB39748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E484C1A-B2A3-42DD-A1D6-A6CFDCB39748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E484C1A-B2A3-42DD-A1D6-A6CFDCB39748}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

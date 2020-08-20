@@ -27,13 +27,13 @@ namespace PhysicalTherapyProject.Application.Services
             if (viewmodel.Post.Id == 0)
             {
 
-                var created_ent = await _postRepository.InsertAsync(viewmodel.Post);
-                ServiceMessage = $"Straipsnis: '{created_ent}' buvo sukurtas!";
+                var created_ent = await _postRepository.AddAsync(viewmodel.Post);
+                ServiceMessage = $"Įrašas: '{created_ent}' buvo sukurtas!";
             }
             else
             {
                 var updated_ent = await _postRepository.UpdateAsync(viewmodel.Post);
-                ServiceMessage = $"Straipsnis: '{updated_ent}' buvo redaguotas!";
+                ServiceMessage = $"Įrašas: '{updated_ent}' buvo redaguotas!";
             }
         }
 

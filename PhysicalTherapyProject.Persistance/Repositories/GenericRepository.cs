@@ -26,7 +26,7 @@ namespace PhysicalTherapyProject.Persistance.Repositories
         public virtual async Task<ICollection<TEntity>> GetAllAsync() =>
             await Query().ToListAsync();
 
-        public virtual async Task<TEntity> InsertAsync(TEntity entry)
+        public virtual async Task<TEntity> AddAsync(TEntity entry)
         {
             entities.Add(entry);
             await _applicationDbContext.SaveChangesAsync();
@@ -37,7 +37,7 @@ namespace PhysicalTherapyProject.Persistance.Repositories
         {
             TEntity dbEntry = await GetByIdAsync(entry.Id);
             if (dbEntry != null)
-            {                
+            {
                 _applicationDbContext.Entry(dbEntry).CurrentValues.SetValues(entry);
                 await _applicationDbContext.SaveChangesAsync();
             }

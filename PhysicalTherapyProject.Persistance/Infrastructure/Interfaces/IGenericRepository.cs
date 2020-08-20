@@ -7,7 +7,7 @@ namespace PhysicalTherapyProject.Persistance.Infrastructure.Interfaces
     {
         Task<T> GetByIdAsync(int id);
         Task<ICollection<T>> GetAllAsync();
-        Task<T> InsertAsync(T item);
+        Task<T> AddAsync(T item);
         Task<T> UpdateAsync(T item);
         Task<T> DeleteAsync(int id);
     }
