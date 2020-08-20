@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using PhysicalTherapyProject.Application.Infrastructure;
 using PhysicalTherapyProject.Application.Models.ViewModels;
 using PhysicalTherapyProject.Domain.Models;
@@ -13,12 +15,32 @@ namespace PhysicalTherapyProjectV2.Controllers
     {
         protected IPostRepository _postRepository;
         private int postType;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public BasePostController(IPostRepository postRepository, int _postType)
+        public BasePostController(IPostRepository postRepository, int _postType,
+            SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _postRepository = postRepository;
             postType = _postType;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Get(int id)
+        {
+            Post post = await _postRepository.GetByIdAsync(id);
+
+            bool x = HttpContext.User.Identity.IsAuthenticated;
+            if (x || post.isForAuthenticatedUser == false)
+            {
+                return View(post);
+            }
+            return Unauthorized();
+        }
+
 
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -73,8 +95,7 @@ namespace PhysicalTherapyProjectV2.Controllers
                 Post = await _postRepository.GetByIdAsync(id)
             });
 
-        [HttpGet]
-        public async Task<ActionResult> Get(int id) => View(await _postRepository.GetByIdAsync(id));
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
